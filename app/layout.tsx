@@ -9,9 +9,9 @@ const russoOne = Russo_One({
 });
 
 export const metadata: Metadata = {
-  title: "kyle b.",
+  title: "kyle bb.",
   description:
-    "engineering and teaching student from Sweden. full-stack by passion, educator by trade.",
+    "engineering and education student from Sweden. full-stack by passion, student by trade.",
 };
 
 export default function RootLayout({
