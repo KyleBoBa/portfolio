@@ -37,7 +37,7 @@ const HOME_SKILLS = [
   { name: "postgres",   logo: "https://cdn.simpleicons.org/postgresql/4169E1" },
   { name: "docker",     logo: "https://cdn.simpleicons.org/docker/2496ED" },
   { name: "prisma",     logo: "https://cdn.simpleicons.org/prisma/f0f0e8" },
-  { name: "tailwind",   logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+  { name: "tailwindcss",   logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
   { name: "git",        logo: "https://cdn.simpleicons.org/git/F05032" },
 ];
 
@@ -87,12 +87,12 @@ export default function Home() {
                   <p className="text-[1.5rem] leading-[1.45]">
                     i&apos;m a 21 yo engineering and
                     <br />
-                    teaching student from Sweden.
+                    education student from Sweden.
                   </p>
                   <p className="text-[1.5rem] leading-[1.45]">
                     full-stack by passion.
                     <br />
-                    educator by trade.
+                    student by trade.
                   </p>
                 </div>
               </div>
