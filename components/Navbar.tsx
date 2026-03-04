@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Monitor } from "lucide-react";
+import { Presentation } from "lucide-react";
 
 interface Props {
   poweredCount?: number;
@@ -36,7 +36,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
           className="transition-opacity hover:opacity-55"
           style={{ color: "#f0f0e8" }}
         >
-          <Monitor size={32} strokeWidth={1.5} />
+          <Presentation size={32} strokeWidth={1.5} />
         </Link>
 
         <div className="flex items-center gap-10">

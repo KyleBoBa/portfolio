@@ -73,7 +73,7 @@ export default function Home() {
 
               {/* action bar */}
               <div
-                className="flex w-fit items-center gap-5 px-5 py-5"
+                className="flex h-20 w-full items-center gap-5 px-5"
                 style={{ backgroundColor: "#d9d9d9" }}
               >
                 <button
@@ -115,13 +115,13 @@ export default function Home() {
             </div>
 
             {/* right — photo placeholder */}
-            <div className="flex justify-end">
+            <div className="flex justify-end space-y-10">
               <div
                 className="flex items-center justify-center"
                 style={{
                   backgroundColor: "#d9d9d9",
-                  width: 500,
-                  height: 500,
+                  width: 400,
+                  height: 400,
                   padding: 80,
                 }}
               >
