@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npx create-next-app@latest:*)",
       "Bash(cp:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(pnpm build:*)"
     ]
   }
 }
