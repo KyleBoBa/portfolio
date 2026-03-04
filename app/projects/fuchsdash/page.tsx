@@ -6,25 +6,11 @@ import { Navbar } from "@/components/Navbar";
 
 const PROJECTS = [
   {
-    name: "project alpha.",
-    description:
-      "a full-stack learning management system built for classroom environments. tracks student progress in real-time.",
-    tags: ["next.js", "typescript", "postgres", "tailwind"],
-    href: "#",
-  },
-  {
-    name: "project beta.",
-    description:
-      "an interactive quiz platform for engineering students. adaptive difficulty based on individual performance.",
-    tags: ["react", "node.js", "mongodb"],
-    href: "#",
-  },
-  {
     name: "project fuchs.",
     description:
       "a dashboard for the sample flow and analysis of a chemical process.",
     tags: ["next.js", "typescript", "postgres", "docker", "prisma", "tailwind", "python"],
-    href: "projects/fuchsdash",
+    href: "#",
   },
 ];
 
@@ -33,8 +19,8 @@ export default function Projects() {
     <div className="min-h-screen" style={{ backgroundColor: "#2c3424", color: "#f0f0e8" }}>
       <Navbar />
 
-      <main className="mx-auto max-w-6xl px-10 pt-36 pb-24">
-        <h1 className="text-[3rem] mb-16">projects.</h1>
+      <main className="page-enter mx-auto max-w-6xl px-10 pt-36 pb-24">
+        <h1 className="text-[3rem] mb-16">Application for Real-time Visualization of Sample Flow</h1>
 
         <div className="grid grid-cols-3 gap-6">
           {PROJECTS.map((p) => (

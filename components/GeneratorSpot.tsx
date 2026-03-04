@@ -17,7 +17,7 @@ export function GeneratorSpot({ id, powered, onPower }: Props) {
 
   const startHover = useCallback(() => {
     if (powered || active || cooldown) return;
-    timerRef.current = setTimeout(() => setActive(true), 350);
+    timerRef.current = setTimeout(() => setActive(true), 600);
   }, [powered, active, cooldown]);
 
   const endHover = useCallback(() => {

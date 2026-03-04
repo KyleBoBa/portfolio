@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type Result = "great" | "success" | "fail" | null;
 
@@ -9,7 +9,7 @@ const CY = 110;
 const R = 80; // ring radius
 const RING_W = 20;
 const IND_R = 72; // indicator tip radius
-const SPEED = 125; // degrees per second
+const SPEED = 200; // degrees per second
 
 // Convert degrees (0 = top, clockwise) to SVG point
 function pt(deg: number) {
@@ -44,12 +44,11 @@ export function SkillCheck({ onSuccess, onFail, onClose }: Props) {
   const angleRef = useRef(0);
   const resultRef = useRef<Result>(null);
 
-  const zone = useMemo(() => {
+  const [zone] = useState(() => {
     const start = Math.random() * 360;
     const width = 55;
-    const greatStart = start + width / 2 - 9;
-    return { start, width, greatStart, greatWidth: 18 };
-  }, []);
+    return { start, width, greatStart: start + width / 2 - 9, greatWidth: 14 };
+  });
 
   // Rotation animation
   useEffect(() => {
