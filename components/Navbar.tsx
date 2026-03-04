@@ -42,7 +42,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
         <div className="flex items-center gap-10">
           {/* Generator lights */}
           <div
-            className="flex items-center gap-[7px]"
+            className="flex items-center gap-[1.75]"
             title={`${poweredCount}/5 generators powered`}
           >
             {Array.from({ length: 5 }, (_, i) => (

@@ -27,8 +27,8 @@ export default function About() {
               className="text-[1.1rem] leading-[1.85]"
               style={{ color: "rgba(240,240,232,0.82)" }}
             >
-              i&apos;m kyle — an engineering and teaching student based in
-              Sweden. i spend my time building things for the web, studying
+              i&apos;m kyle — an engineering and teaching student studying at KTH Royal Institute of Technology in
+              Stockholm, Sweden. i spend my time building things for the web, studying
               pedagogy, and thinking about how software can make learning more
               effective.
             </p>
@@ -51,6 +51,20 @@ export default function About() {
 
           {/* Quick facts */}
           <div className="space-y-8">
+            <div>
+              <p
+                className="text-xs uppercase tracking-widest mb-3"
+                style={{ color: "rgba(240,240,232,0.4)" }}
+              >
+                currently working on
+              </p>
+              <p className="text-[1.05rem]" style={{ color: "rgba(240,240,232,0.82)" }}>
+                <a href="/projects" target="_blank" rel="noreferrer" className="underline">
+                  project fuchs<br />
+                </a>
+                and this website!
+              </p>
+            </div>
             <div>
               <p
                 className="text-xs uppercase tracking-widest mb-3"
