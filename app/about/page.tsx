@@ -1,15 +1,15 @@
 import { Navbar } from "@/components/Navbar";
 
 const SKILLS = [
-  "typescript",
-  "next.js",
-  "react",
-  "python",
-  "postgres",
-  "docker",
-  "prisma",
-  "tailwind",
-  "git",
+  { name: "typescript",  logo: "https://cdn.simpleicons.org/typescript/3178C6" },
+  { name: "next.js",     logo: "https://cdn.simpleicons.org/nextdotjs/000000" },
+  { name: "react",       logo: "https://cdn.simpleicons.org/react/087EA4" },
+  { name: "python",      logo: "https://cdn.simpleicons.org/python/3776AB" },
+  { name: "postgres",    logo: "https://cdn.simpleicons.org/postgresql/336791" },
+  { name: "docker",      logo: "https://cdn.simpleicons.org/docker/2496ED" },
+  { name: "prisma",      logo: "https://cdn.simpleicons.org/prisma/000000" },
+  { name: "tailwindcss",    logo: "https://cdn.simpleicons.org/tailwindcss/0F172A" },
+  { name: "git",         logo: "https://cdn.simpleicons.org/git/F05032" },
 ];
 
 export default function About() {
@@ -27,8 +27,14 @@ export default function About() {
               className="text-[1.1rem] leading-[1.85]"
               style={{ color: "rgba(240,240,232,0.82)" }}
             >
-              i&apos;m kyle — an engineering and teaching student studying at KTH Royal Institute of Technology in
-              Stockholm, Sweden. i spend my time building things for the web, studying
+              heya! i&apos;m kyle boström balthazar — an
+              <a href="https://www.kth.se/utbildning/civilingenjor/civing-larare/civilingenjor-och-larare-300-hp-1.4108" 
+                target="_blank" rel="noreferrer" 
+                className="underline"
+              >
+              engineering and teaching student</a> studying at KTH Royal Institute of Technology in
+              Stockholm, Sweden. <br />
+              i spend my time building things for the web, studying
               pedagogy, and thinking about how software can make learning more
               effective.
             </p>
@@ -73,7 +79,7 @@ export default function About() {
                 currently studying
               </p>
               <p className="text-[1.05rem]" style={{ color: "rgba(240,240,232,0.82)" }}>
-                engineering + teaching programme
+                3rd year of engineering & education programme
               </p>
             </div>
             <div>
@@ -106,15 +112,22 @@ export default function About() {
           className="pt-16"
           style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
         >
-          <h2 className="text-[2rem] mb-10">tech stack.</h2>
+          <div className="flex items-center justify-between mb-10">
+            <h2 className="text-[2rem]">tech stack.</h2>
+            <a href="/projects" className="text-[1rem]">
+              see them in use →
+            </a>
+          </div>
           <div className="flex flex-wrap gap-3">
-            {SKILLS.map((skill) => (
+            {SKILLS.map(({ name, logo }) => (
               <span
-                key={skill}
-                className="rounded px-4 py-2 text-sm"
+                key={name}
+                className="rounded px-4 py-2 text-sm flex items-center gap-2"
                 style={{ backgroundColor: "#d9d9d9", color: "#2c3424" }}
               >
-                {skill}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={logo} alt="" width={16} height={16} style={{ objectFit: "contain", flexShrink: 0 }} />
+                {name}
               </span>
             ))}
           </div>
