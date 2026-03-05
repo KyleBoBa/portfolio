@@ -5,7 +5,8 @@
       "Bash(cp:*)",
       "Bash(pnpm install:*)",
       "Bash(pnpm build:*)",
-      "Bash(pnpm lint:*)"
+      "Bash(pnpm lint:*)",
+      "Bash(gh api:*)"
     ]
   }
 }
