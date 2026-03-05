@@ -8,5 +8,9 @@
       "Bash(pnpm lint:*)",
       "Bash(gh api:*)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "magic"
+  ]
 }
