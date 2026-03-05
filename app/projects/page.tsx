@@ -6,25 +6,32 @@ import { Navbar } from "@/components/Navbar";
 
 const PROJECTS = [
   {
-    name: "project alpha.",
-    description:
-      "a full-stack learning management system built for classroom environments. tracks student progress in real-time.",
-    tags: ["next.js", "typescript", "postgres", "tailwind"],
-    href: "#",
-  },
-  {
-    name: "project beta.",
-    description:
-      "an interactive quiz platform for engineering students. adaptive difficulty based on individual performance.",
-    tags: ["react", "node.js", "mongodb"],
-    href: "#",
-  },
-  {
     name: "project fuchs.",
     description:
-      "a dashboard for the sample flow and analysis of a chemical process.",
+      "real-time dashboard for chemical sample flow analysis. full-stack with live data, microsoft OAuth, and a python ingestion service.",
     tags: ["next.js", "typescript", "postgres", "docker", "prisma", "tailwind", "python"],
-    href: "projects/fuchsdash",
+    href: "/projects/fuchsdash",
+  },
+  {
+    name: "movie search.",
+    description:
+      "react SPA for searching and saving movies from an external API. favorites managed with context API, client-side routing with react router.",
+    tags: ["react", "javascript", "vite", "react router", "css"],
+    href: "/projects/movie-search",
+  },
+  {
+    name: "biljett.",
+    description:
+      "CLI tool that finds the cheapest SL (stockholm transit) ticket combination for any travel period. dynamic programming, coin-change variant.",
+    tags: ["python"],
+    href: "/projects/biljett",
+  },
+  {
+    name: "shell.",
+    description:
+      "POSIX-compliant shell built from scratch in python. builtins, PATH resolution, subprocess execution — a CodeCrafters challenge.",
+    tags: ["python", "systems"],
+    href: "/projects/shell",
   },
 ];
 
