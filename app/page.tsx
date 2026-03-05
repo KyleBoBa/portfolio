@@ -124,7 +124,7 @@ export default function Home() {
                     <FileText size={20} />
                   </a>
                 </div>
-                <div className="flex items-center gap-5 pl-1">
+                <div className="flex items-center gap-8 pl-4">
                   {[
                     { Icon: Github,   href: "https://github.com/kyleboba" },
                     { Icon: Linkedin, href: "https://www.linkedin.com/in/kyle-bostr%C3%B6m-balthazar/" },
