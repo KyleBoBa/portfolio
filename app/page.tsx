@@ -21,10 +21,10 @@ const FEATURED_PROJECTS = [
     rotation: -0.6,
   },
   {
-    name: "project alpha.",
-    description: "a full-stack learning management system built for classroom environments. tracks student progress in real-time.",
-    tags: ["next.js", "typescript", "postgres", "tailwind"],
-    href: "#",
+    name: "movie search.",
+    description: "react SPA for searching and saving movies from an external API. favorites via context API, client-side routing with react router.",
+    tags: ["react", "javascript", "vite", "react router"],
+    href: "/projects/movie-search",
     rotation: 0.5,
   },
 ];
@@ -67,11 +67,8 @@ export default function Home() {
         <div className="absolute top-1/2 left-8 z-10">
           <GeneratorSpot id={1} powered={powered.has(1)} onPower={handlePower} />
         </div>
-        <div className="absolute bottom-24 left-1/3 z-10">
-          <GeneratorSpot id={2} powered={powered.has(2)} onPower={handlePower} />
-        </div>
         <div className="absolute top-40 left-1/2 z-10">
-          <GeneratorSpot id={3} powered={powered.has(3)} onPower={handlePower} />
+          <GeneratorSpot id={2} powered={powered.has(2)} onPower={handlePower} />
         </div>
 
         <div className="mx-auto w-full max-w-6xl px-10">
@@ -172,6 +169,9 @@ export default function Home() {
         className="relative py-28"
         style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
       >
+        <div className="absolute top-14 left-1/3 z-10">
+          <GeneratorSpot id={3} powered={powered.has(3)} onPower={handlePower} />
+        </div>
         <div className="mx-auto max-w-6xl px-10">
           <div className="flex items-baseline justify-between mb-14">
             <h2 className="text-[2.8rem]">projects.</h2>
