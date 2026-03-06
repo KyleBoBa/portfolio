@@ -6,7 +6,8 @@
       "Bash(pnpm install:*)",
       "Bash(pnpm build:*)",
       "Bash(pnpm lint:*)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "mcp__magic__21st_magic_component_inspiration"
     ]
   },
   "enableAllProjectMcpServers": true,

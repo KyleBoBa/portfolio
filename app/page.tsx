@@ -30,15 +30,15 @@ const FEATURED_PROJECTS = [
 ];
 
 const HOME_SKILLS = [
-  { name: "typescript", logo: "https://cdn.simpleicons.org/typescript/3178C6" },
-  { name: "next.js",    logo: "https://cdn.simpleicons.org/nextdotjs/f0f0e8" },
-  { name: "react",      logo: "https://cdn.simpleicons.org/react/61DAFB" },
-  { name: "python",     logo: "https://cdn.simpleicons.org/python/FFD43B" },
-  { name: "postgres",   logo: "https://cdn.simpleicons.org/postgresql/4169E1" },
-  { name: "docker",     logo: "https://cdn.simpleicons.org/docker/2496ED" },
-  { name: "prisma",     logo: "https://cdn.simpleicons.org/prisma/f0f0e8" },
-  { name: "tailwindcss",   logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
-  { name: "git",        logo: "https://cdn.simpleicons.org/git/F05032" },
+  { name: "typescript",  logo: "https://cdn.simpleicons.org/typescript/3178C6" },
+  { name: "next.js",     logo: "https://cdn.simpleicons.org/nextdotjs/f0f0e8" },
+  { name: "react",       logo: "https://cdn.simpleicons.org/react/61DAFB" },
+  { name: "tailwindcss", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+  { name: "python",      logo: "https://cdn.simpleicons.org/python/FFD43B" },
+  { name: "postgres",    logo: "https://cdn.simpleicons.org/postgresql/4169E1" },
+  { name: "docker",      logo: "https://cdn.simpleicons.org/docker/2496ED" },
+  { name: "git",         logo: "https://cdn.simpleicons.org/git/F05032" },
+  { name: "supabase",    logo: "https://cdn.simpleicons.org/supabase/3FCF70" },
 ];
 
 export default function Home() {
@@ -162,30 +162,19 @@ export default function Home() {
       </section>
 
       {/* ── Skills ──────────────────────────────────────── */}
-      <section 
+      <section
         id="skills"
-        className="relative py-28"
+        className="relative py-24"
         style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
       >
         <div className="mx-auto max-w-6xl px-10">
           <div className="mb-10">
-            <h2 className="text-[2rem]">my most used technologies.</h2>
+            <h2 className="text-[2.8rem] mb-3">most used technologies.</h2>
+            <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="grid grid-cols-3 gap-4">
             {HOME_SKILLS.map(({ name, logo }) => (
-              <span
-                key={name}
-                className="rounded px-4 py-2 text-sm flex items-center gap-2"
-                style={{
-                  backgroundColor: "rgba(54,64,48,0.7)",
-                  border: "1px solid rgba(107,125,91,0.3)",
-                  color: "#f0f0e8",
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logo} alt="" width={16} height={16} style={{ objectFit: "contain", flexShrink: 0 }} />
-                {name}
-              </span>
+              <SkillTile key={name} name={name} logo={logo} />
             ))}
           </div>
         </div>
@@ -195,15 +184,18 @@ export default function Home() {
       <section
         id="project"
         className="relative py-28"
-        style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
       >
+        {/* 4th generator spot */}
         <div className="absolute top-14 left-1/3 z-10">
           <GeneratorSpot id={3} powered={powered.has(3)} onPower={handlePower} />
         </div>
         <div className="mx-auto max-w-6xl px-10">
-          <div className="flex items-baseline justify-between mb-14">
-            <h2 className="text-[2.8rem]">projects.</h2>
-            <a href="/projects" className="text-[1rem] leading-[1.5] transition-opacity hover:opacity-55">
+          <div className="flex items-start justify-between mb-14">
+            <div>
+              <h2 className="text-[2.8rem] mb-3">projects.</h2>
+              <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
+            </div>
+            <a href="/projects" className="text-[1rem] leading-[1.5] transition-opacity hover:opacity-55 mt-3">
               view all →
             </a>
           </div>
@@ -227,7 +219,10 @@ export default function Home() {
         </div>
 
         <div className="mx-auto max-w-6xl px-10">
-          <h2 className="mb-12 text-[2.8rem]">contact.</h2>
+          <div className="mb-12">
+            <h2 className="text-[2.8rem] mb-3">contact.</h2>
+            <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
+          </div>
           <div className="grid grid-cols-[1fr_1fr] items-start gap-16">
             <div className="space-y-4">
               <p className="text-[1.25rem] leading-[1.5]">
@@ -262,7 +257,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Footer ───────────────────────────────────────── */}
+      {/* ── Footer ─────────────────────────────────────── */}
       <footer
         className="py-8"
         style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
@@ -280,6 +275,75 @@ export default function Home() {
           </button>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function SkillTile({ name, logo }: { name: string; logo: string }) {
+  const [hovered, setHovered] = useState(false);
+
+  const corners = [
+    { top: -5, left: -5 },
+    { top: -5, right: -5 },
+    { bottom: -5, left: -5 },
+    { bottom: -5, right: -5 },
+  ] as const;
+
+  return (
+    <div
+      className="relative flex flex-col items-center justify-center gap-3 cursor-default"
+      style={{
+        padding: "1.75rem 1rem",
+        background: hovered
+          ? "linear-gradient(145deg, rgba(64,76,54,0.85) 0%, rgba(40,50,32,0.7) 100%)"
+          : "linear-gradient(145deg, rgba(44,54,38,0.55) 0%, rgba(32,40,25,0.45) 100%)",
+        border: hovered
+          ? "1px solid rgba(198,202,181,0.28)"
+          : "1px solid rgba(198,202,181,0.1)",
+        transition: "background 200ms, border-color 200ms",
+        zIndex: hovered ? 1 : 0,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Corner bracket marks */}
+      {corners.map((pos, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            width: 8,
+            height: 8,
+            backgroundColor: "#c6cab5",
+            opacity: hovered ? 1 : 0,
+            transition: "opacity 150ms",
+            ...pos,
+          }}
+        />
+      ))}
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={logo}
+        alt=""
+        width={38}
+        height={38}
+        style={{
+          objectFit: "contain",
+          flexShrink: 0,
+          transition: "transform 200ms",
+          transform: hovered ? "scale(1.12)" : "scale(1)",
+        }}
+      />
+      <span
+        className="text-sm text-center"
+        style={{
+          color: hovered ? "#f0f0e8" : "rgba(240,240,232,0.6)",
+          transition: "color 200ms",
+        }}
+      >
+        {name}
+      </span>
     </div>
   );
 }
