@@ -161,6 +161,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Skills ──────────────────────────────────────── */}
+      <section 
+        id="skills"
+        className="relative py-28"
+        style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
+      >
+        <div className="mx-auto max-w-6xl px-10">
+          <div className="mb-10">
+            <h2 className="text-[2rem]">my most used technologies.</h2>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {HOME_SKILLS.map(({ name, logo }) => (
+              <span
+                key={name}
+                className="rounded px-4 py-2 text-sm flex items-center gap-2"
+                style={{
+                  backgroundColor: "rgba(54,64,48,0.7)",
+                  border: "1px solid rgba(107,125,91,0.3)",
+                  color: "#f0f0e8",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={logo} alt="" width={16} height={16} style={{ objectFit: "contain", flexShrink: 0 }} />
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Projects ─────────────────────────────────────── */}
       <section
         id="project"
@@ -180,31 +210,6 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-12 pt-4">
             {FEATURED_PROJECTS.map((p) => (
               <PaperProjectCard key={p.name} {...p} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Skills (lowkey) ──────────────────────────────── */}
-      <section className="py-14" style={{ borderTop: "1px solid rgba(240,240,232,0.06)" }}>
-        <div className="mx-auto max-w-6xl px-10">
-          <p
-            className="text-xs uppercase tracking-widest mb-7"
-            style={{ color: "rgba(240,240,232,0.22)" }}
-          >
-            tech i use
-          </p>
-          <div className="flex flex-wrap gap-7 items-center">
-            {HOME_SKILLS.map(({ name, logo }) => (
-              <div
-                key={name}
-                className="flex items-center gap-2"
-                style={{ opacity: 0.38 }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logo} alt="" width={18} height={18} style={{ objectFit: "contain" }} />
-                <span className="text-xs" style={{ color: "#f0f0e8" }}>{name}</span>
-              </div>
             ))}
           </div>
         </div>
