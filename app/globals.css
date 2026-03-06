@@ -71,13 +71,60 @@
   100% { transform: var(--card-rotate, rotate(0deg)) perspective(900px) rotateX(-88deg); opacity: 0; }
 }
 
+/* 1.1 — unfolds upward from below (like lifting from the card's position) */
 @keyframes page-unfold {
-  0%   { opacity: 0; transform: perspective(1400px) rotateX(-18deg) translateY(24px); }
+  0%   { opacity: 0; transform: perspective(1000px) rotateX(6deg) translateY(24px); }
   55%  { opacity: 1; }
-  100% { opacity: 1; transform: perspective(1400px) rotateX(0deg) translateY(0); }
+  100% { opacity: 1; transform: none; }
 }
 
 .page-enter {
-  animation: page-unfold 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  transform-origin: top center;
+  animation: page-unfold 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: bottom center;
+}
+
+/* ── Sliding door navigation transitions ───────────── */
+/* direction set on <html data-nav-dir="..."> before router.push */
+
+html[data-nav-dir="forward"] .page-slide-enter {
+  animation: slide-from-right 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html[data-nav-dir="back"] .page-slide-enter {
+  animation: slide-from-left 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html[data-nav-dir="lateral"] .page-slide-enter {
+  animation: nav-fade-in 200ms ease both;
+}
+
+@keyframes slide-from-right {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes slide-from-left {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes nav-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Card expand / contract (project card ↔ project page) ── */
+/* Old page disappears immediately; new page fades in.        */
+/* The shared element (project title) morphs between the two. */
+:root[data-nav-dir="expand"]::view-transition-old(root) {
+  animation: none;
+}
+:root[data-nav-dir="expand"]::view-transition-new(root) {
+  animation: nav-fade-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Shared element group: controls the position/size morph */
+:root[data-nav-dir="expand"]::view-transition-group(*) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Cross-fade between old/new screenshots of the shared element */
+:root[data-nav-dir="expand"]::view-transition-old(*),
+:root[data-nav-dir="expand"]::view-transition-new(*) {
+  animation-duration: 420ms;
 }

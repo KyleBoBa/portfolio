@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 
 const PROJECTS = [
@@ -46,14 +47,14 @@ export default function Projects() {
     >
       <Navbar />
 
-      <main className="mx-auto max-w-6xl px-10 pt-36 pb-24">
+      <main className="page-slide-enter mx-auto max-w-6xl px-10 pt-36 pb-24">
         {/* Heading */}
         <div className="mb-16">
           <h1 className="text-[3rem] mb-4">projects.</h1>
           <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-6" style={{ perspective: "1200px" }}>
           {PROJECTS.map((p, i) => (
             <ProjectCard key={p.name} index={i} {...p} />
           ))}
@@ -94,10 +95,23 @@ function ProjectCard({
   index: number;
 }) {
   const [hovered, setHovered] = useState(false);
+  const router = useRouter();
+  const slug = href.split("/").pop() ?? index.toString();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.documentElement.dataset.navDir = "expand";
+    if ("startViewTransition" in document) {
+      (document as any).startViewTransition(() => router.push(href));
+    } else {
+      router.push(href);
+    }
+  };
 
   return (
     <a
       href={href}
+      onClick={handleClick}
       className="relative block rounded-xl p-7 overflow-hidden transition-all duration-200"
       style={{
         background: hovered
@@ -128,7 +142,10 @@ function ProjectCard({
       </span>
 
       <div className="mb-4 flex items-start justify-between">
-        <h3 className="text-[1.15rem]">{name}</h3>
+        <h3
+          className="text-[1.15rem]"
+          style={{ viewTransitionName: `project-${slug}` } as React.CSSProperties}
+        >{name}</h3>
         <ExternalLink
           size={15}
           className="mt-0.5 transition-opacity duration-200"

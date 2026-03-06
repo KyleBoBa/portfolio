@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { Presentation } from "lucide-react";
 
 interface Props {
@@ -9,14 +10,39 @@ interface Props {
   onContactClick?: () => void;
 }
 
+function getNavDir(from: string, to: string): "forward" | "back" | "lateral" {
+  const path = (p: string) => p.split("#")[0] || "/";
+  const f = path(from);
+  const t = path(to);
+  if (f === "/" && t !== "/") return "forward";
+  if (f !== "/" && t === "/") return "back";
+  return "lateral";
+}
+
 export function Navbar({ poweredCount = 0, onContactClick }: Props) {
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Clear nav direction after each route settle
+  useEffect(() => {
+    const t = setTimeout(() => {
+      delete document.documentElement.dataset.navDir;
+    }, 350);
+    return () => clearTimeout(t);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const navigate = (to: string) => {
+    const dir = getNavDir(pathname, to);
+    document.documentElement.dataset.navDir = dir;
+    router.push(to);
+  };
 
   return (
     <nav
@@ -35,6 +61,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
           aria-label="Home"
           className="transition-opacity hover:opacity-55"
           style={{ color: "#f0f0e8" }}
+          onClick={(e) => { e.preventDefault(); navigate("/"); }}
         >
           <Presentation size={32} strokeWidth={1.5} />
         </Link>
@@ -72,6 +99,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
               href="/about"
               className="text-[17px] transition-opacity hover:opacity-55"
               style={{ color: "#f0f0e8" }}
+              onClick={(e) => { e.preventDefault(); navigate("/about"); }}
             >
               about
             </Link>
@@ -79,6 +107,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
               href="/projects"
               className="text-[17px] transition-opacity hover:opacity-55"
               style={{ color: "#f0f0e8" }}
+              onClick={(e) => { e.preventDefault(); navigate("/projects"); }}
             >
               projects
             </Link>
@@ -95,6 +124,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
                 href="/#contact"
                 className="text-[17px] transition-opacity hover:opacity-55"
                 style={{ color: "#f0f0e8" }}
+                onClick={(e) => { e.preventDefault(); navigate("/#contact"); }}
               >
                 contact
               </Link>

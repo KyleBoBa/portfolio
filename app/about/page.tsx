@@ -39,7 +39,7 @@ export default function About() {
     >
       <Navbar />
 
-      <main className="mx-auto max-w-6xl px-10 pt-36 pb-24">
+      <main className="page-slide-enter mx-auto max-w-6xl px-10 pt-36 pb-24">
         {/* Heading */}
         <div className="mb-16">
           <h1 className="text-[3rem] mb-4">about.</h1>

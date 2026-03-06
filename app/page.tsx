@@ -55,7 +55,7 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#2c3424", color: "#f0f0e8" }}>
+    <div className="min-h-screen page-slide-enter" style={{ backgroundColor: "#2c3424", color: "#f0f0e8" }}>
       <Navbar poweredCount={powered.size} onContactClick={scrollToContact} />
 
       {/* ── Hero ─────────────────────────────────────────── */}
