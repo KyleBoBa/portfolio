@@ -6,8 +6,6 @@ const SKILLS = [
   { name: "react",       logo: "https://cdn.simpleicons.org/react/61DAFB" },
   { name: "python",      logo: "https://cdn.simpleicons.org/python/FFD43B" },
   { name: "postgres",    logo: "https://cdn.simpleicons.org/postgresql/4169E1" },
-  { name: "docker",      logo: "https://cdn.simpleicons.org/docker/2496ED" },
-  { name: "prisma",      logo: "https://cdn.simpleicons.org/prisma/f0f0e8" },
   { name: "tailwindcss", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
   { name: "git",         logo: "https://cdn.simpleicons.org/git/F05032" },
 ];
@@ -17,8 +15,11 @@ const FACTS = [
     label: "currently working on",
     content: (
       <>
-        <a href="/projects" className="underline">project fuchs</a>
-        <br />and this website!
+        <a href="/projects/fuchsdash" className="underline">project fuchs</a>
+        <br />
+        <a href="/projects/biljett" className="underline">biljett</a>
+        <br />
+        and this website!
       </>
     ),
   },
@@ -56,7 +57,7 @@ export default function About() {
             }}
           >
             <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
-              heya! i&apos;m <span style={{ color: "rgba(238, 212, 42, 0.80)" }}>kyle boström balthazar</span> — an{" "}
+              I&apos;m <span style={{ color: "rgba(238, 212, 42, 0.80)" }}>kyle boström balthazar</span> — an{" "}
               <a
                 href="https://www.kth.se/utbildning/civilingenjor/civing-larare/civilingenjor-och-larare-300-hp-1.4108"
                 target="_blank"
@@ -66,15 +67,20 @@ export default function About() {
                 engineering and teaching student
               </a>{" "}
               studying at <span style={{ color: "rgba(238, 212, 42, 0.72)" }}>KTH</span> Royal Institute of Technology in <span style={{ color: "rgba(238, 212, 42, 0.72)" }}>Stockholm, Sweden</span>.{" "}
-              i spend my time picking up new skills for the web, studying, and thinking
+              When focus on my projects, I spend my time picking up knowledge and skills for the web, studying, and thinking
               about how software can make learning more effective.
             </p>
             <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
-              teaching has made me a better developer. breaking complex problems into clear,
+              Teaching has made me a better developer. Breaking complex problems into clear,
               digestible steps is a skill that transfers directly to writing clean, readable code.
             </p>
             <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
-              feel free to take a look at my projects, or reach out if you want to know more
+              Outside of school and projects, I enjoy playing video games (as you might have guessed by the easter eggs), 
+              finding recipes to cook or bake, reading books (currently reading The Witcher - Baptism of Fire) 
+              and spending time with friends.
+            </p>
+            <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
+              Feel free to take a look at my projects, or reach out if you want to know more
               about my experience and skill set!
             </p>
           </div>

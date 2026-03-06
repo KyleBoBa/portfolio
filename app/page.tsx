@@ -78,22 +78,20 @@ export default function Home() {
             <div className="space-y-10">
               <div className="space-y-7 text-center">
                 <h1 className="text-[2.75rem] leading-[1.08]">
-                  welcome to kyles site.
+                  Welcome to kyles site.
                 </h1>
                 <div className="space-y-5">
                   <p className="text-[1.5rem] leading-[1.45]">
-                    i&apos;m a 21 yo engineering and
+                    Hiya! I&apos;m a 21 yo engineering and
                     <br />
-                    education student from Sweden.
+                    education student specializing in system architecture.
                   </p>
                   <p className="text-[1.5rem] leading-[1.45]">
-                    full-stack by passion.
-                    <br />
-                    student by trade.
+                    I dedicate a lot of time to exploring open-source projects 
+                    to learn how things are built and integrated.
                   </p>
                 </div>
               </div>
-
               {/* action bar */}
               <div
                 className="flex h-20 w-full items-center gap-4 px-4"
@@ -228,16 +226,16 @@ export default function Home() {
           <div className="grid grid-cols-[1fr_1fr] items-start gap-16">
             <div className="space-y-4">
               <p className="text-[1.25rem] leading-[1.5]">
-                got a project in mind?
+                Got a project in mind?
                 <br />
-                let&apos;s build something.
+                Let&apos;s build something.
               </p>
               <p
                 className="text-[1rem] leading-[1.75]"
                 style={{ color: "rgba(240,240,232,0.5)" }}
               >
-                open to freelance work, collaborations, and interesting
-                conversations. reach out through any of the channels below.
+                Open to freelance work, collaborations, and interesting
+                conversations. Reach out through the channels provided.
               </p>
             </div>
             <div className="space-y-5">
@@ -266,7 +264,7 @@ export default function Home() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-10">
           <span className="text-sm" style={{ color: "rgba(240,240,232,0.3)" }}>
-            kyle b. — {new Date().getFullYear()}
+            kyle bb. — {new Date().getFullYear()}
           </span>
           <button
             onClick={scrollTop}
