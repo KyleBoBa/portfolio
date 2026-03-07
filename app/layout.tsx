@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Russo_One } from "next/font/google";
+import { Russo_One, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const russoOne = Russo_One({
   variable: "--font-russo-one",
   subsets: ["latin"],
-  weight: ["400", "400"],
+  weight: ["400"],
+});
+
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -21,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${russoOne.variable} antialiased`}>{children}</body>
+      <body className={`${russoOne.variable} ${spaceMono.variable} antialiased`}>{children}</body>
     </html>
   );
 }
