@@ -15,6 +15,7 @@ export default function MovieSearch() {
       tagline="search, browse, and save movies — a react SPA built with Vite"
       tags={["react", "javascript", "vite", "react router", "context api", "css"]}
       githubUrl="https://github.com/KyleBoBa/movie-search"
+      screenshots={["/movie-search1.png"]}
       sections={[
         {
           title: "overview",

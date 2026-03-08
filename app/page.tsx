@@ -55,13 +55,12 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen page-slide-enter" style={{ backgroundColor: "var(--ws-sage)", color: "var(--ws-cream)" }}>
+    <div className="min-h-screen page-slide-enter sage-surface" style={{ color: "var(--ws-cream)" }}>
       <Navbar poweredCount={powered.size} onContactClick={scrollToContact} />
 
       {/* ── Hero — dark sage wall ──────────────────────── */}
       <section
         className="relative overflow-hidden"
-        style={{ backgroundColor: "var(--ws-sage)", color: "var(--ws-cream)" }}
       >
         {/* Amber lamp glow — upper right corner */}
         <div
@@ -87,7 +86,7 @@ export default function Home() {
 
         <div
           className="mx-auto w-full max-w-6xl px-10"
-          style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "7rem", paddingBottom: "4rem" }}
+          style={{ minHeight: "60vh", display: "flex", paddingTop: "20vh"}}
         >
           <div className="grid w-full grid-cols-1 items-center gap-16 sm:grid-cols-2">
 
@@ -183,19 +182,45 @@ export default function Home() {
               </div>
             </div>
 
-            {/* right — cream-matted photo placeholder */}
+            {/* right — cream-matted photo */}
             <div className="flex justify-center sm:justify-end">
               <div
                 style={{
                   backgroundColor: "var(--ws-cream)",
-                  padding: 50,
+                  padding: "36px 36px 18px",
                   width: 400,
-                  height: 400,
                   flexShrink: 0,
                   boxShadow: "0 10px 36px rgba(0,0,0,0.40)",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                <div style={{ backgroundColor: "#0d0c08", width: "100%", height: "100%" }} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/full-body-draft.jpg"
+                  alt="Kyle Boström Balthazar"
+                  style={{
+                    width: "100%",
+                    height: 320,
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    display: "block",
+                  }}
+                />
+                <p
+                  style={{
+                    marginTop: 12,
+                    fontSize: "0.62rem",
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "rgba(28,26,20,0.40)",
+                    fontFamily: "var(--font-space-mono), monospace",
+                    textAlign: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  stockholm, sweden
+                </p>
               </div>
             </div>
           </div>
@@ -205,8 +230,7 @@ export default function Home() {
       {/* ── Skills ──────────────────────────────────────── */}
       <section
         id="skills"
-        className="relative py-24"
-        style={{ borderTop: "1px solid rgba(244,240,230,0.08)" }}
+        className="relative py-36"
       >
         <div className="mx-auto max-w-6xl px-10">
           <div className="mb-10">
@@ -224,8 +248,7 @@ export default function Home() {
       {/* ── Projects — pinned paper cards ────────────────── */}
       <section
         id="project"
-        className="relative py-28"
-        style={{ borderTop: "1px solid rgba(244,240,230,0.08)" }}
+        className="relative"
       >
         <div className="absolute top-14 left-1/3 z-10">
           <GeneratorSpot id={3} powered={powered.has(3)} onPower={handlePower} />
@@ -256,7 +279,6 @@ export default function Home() {
       <section
         id="contact"
         className="relative py-28"
-        style={{ borderTop: "1px solid rgba(244,240,230,0.08)" }}
       >
         <div className="absolute top-8 right-20 z-10">
           <GeneratorSpot id={4} powered={powered.has(4)} onPower={handlePower} />

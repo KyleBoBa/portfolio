@@ -49,8 +49,8 @@ const FACTS: { id: string; label: React.ReactNode; content: React.ReactNode }[] 
 export default function About() {
   return (
     <div
-      className="min-h-screen"
-      style={{ backgroundColor: "var(--ws-sage)", color: "var(--ws-cream)" }}
+      className="min-h-screen sage-surface"
+      style={{ color: "var(--ws-cream)" }}
     >
       <Navbar />
 

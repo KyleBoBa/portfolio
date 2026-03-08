@@ -43,8 +43,8 @@ const ROTATIONS = [-1.4, 0.9, -0.6, 1.1];
 export default function Projects() {
   return (
     <div
-      className="min-h-screen"
-      style={{ backgroundColor: "#2e3d26", color: "#f4f0e6" }}
+      className="min-h-screen sage-surface"
+      style={{ color: "#f4f0e6" }}
     >
       <Navbar />
 

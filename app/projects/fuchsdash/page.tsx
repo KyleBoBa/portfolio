@@ -15,6 +15,7 @@ export default function FuchsDash() {
       name="project fuchs."
       tagline="real-time sample flow dashboard for a chemical process research lab at KTH"
       tags={["next.js", "typescript", "postgres", "docker", "prisma", "tailwind", "python"]}
+      screenshots={["/fuchs-dash1.png"]}
       sections={[
         {
           title: "overview",
