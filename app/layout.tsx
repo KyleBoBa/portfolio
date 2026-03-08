@@ -17,7 +17,7 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "kyle bb.",
   description:
-    "engineering and education student from Sweden. full-stack by passion, student by trade.",
+    "engineering and education student from Sweden. currently studying at KTH Royal Institute of Technology. passionate about software development and open source.",
 };
 
 export default function RootLayout({
