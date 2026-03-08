@@ -317,7 +317,7 @@ export default function Home() {
                   className="flex items-center gap-4 text-[0.88rem] transition-opacity hover:opacity-55"
                   style={{ color: "var(--ws-cream)", fontFamily: "var(--font-space-mono), monospace" }}
                 >
-                  <Icon size={16} style={{ color: "var(--ws-sage-muted)", flexShrink: 0 }} />
+                  <Icon size={22} style={{ color: "var(--ws-cream)", flexShrink: 0 }} />
                   <span>{label}</span>
                 </a>
               ))}
