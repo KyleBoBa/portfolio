@@ -26,43 +26,58 @@ export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections 
   const goBack = () => {
     document.documentElement.dataset.navDir = "expand";
     if ("startViewTransition" in document) {
-      (document as any).startViewTransition(() => router.push("/projects"));
+      (document as Document & { startViewTransition: (cb: () => void) => void }).startViewTransition(() => router.push("/projects"));
     } else {
       router.push("/projects");
     }
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#2c3424", color: "#f0f0e8" }}>
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: "var(--ws-cream)", color: "var(--ws-ink)" }}
+    >
       <Navbar />
 
-      <main className="page-enter mx-auto max-w-3xl px-10 pt-36 pb-24">
+      <main className="page-enter mx-auto max-w-3xl px-10 pb-28 pt-36">
         {/* Back link */}
         <button
           onClick={goBack}
-          className="text-sm transition-opacity hover:opacity-70"
-          style={{ color: "rgba(240,240,232,0.38)", background: "none", border: "none", padding: 0, cursor: "pointer" }}
+          className="text-xs uppercase tracking-widest transition-opacity hover:opacity-60"
+          style={{
+            color: "var(--ws-sage-muted)",
+            fontFamily: "var(--font-space-mono), monospace",
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+          }}
         >
           ← projects
         </button>
 
         {/* Header */}
         <div className="mt-8 mb-14">
-          <div className="flex items-start justify-between gap-6 mb-4">
+          <div className="mb-4 flex items-start justify-between gap-6">
             <h1
-              className="text-[2.6rem] leading-tight"
+              className="text-[2.4rem] leading-tight"
               style={{ viewTransitionName: `project-${slug}` } as React.CSSProperties}
-            >{name}</h1>
-            <div className="flex items-center gap-5 mt-3 shrink-0">
+            >
+              {name}
+            </h1>
+            <div className="mt-3 flex shrink-0 items-center gap-5">
               {githubUrl && (
                 <a
                   href={githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
-                  style={{ color: "rgba(240,240,232,0.45)" }}
+                  className="flex items-center gap-1.5 text-xs transition-opacity hover:opacity-60"
+                  style={{
+                    color: "var(--ws-ink-faint)",
+                    fontFamily: "var(--font-space-mono), monospace",
+                  }}
                 >
-                  <Github size={16} />
+                  <Github size={14} />
                   github
                 </a>
               )}
@@ -71,10 +86,13 @@ export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections 
                   href={liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
-                  style={{ color: "rgba(240,240,232,0.45)" }}
+                  className="flex items-center gap-1.5 text-xs transition-opacity hover:opacity-60"
+                  style={{
+                    color: "var(--ws-ink-faint)",
+                    fontFamily: "var(--font-space-mono), monospace",
+                  }}
                 >
-                  <ExternalLink size={16} />
+                  <ExternalLink size={14} />
                   live
                 </a>
               )}
@@ -82,8 +100,8 @@ export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections 
           </div>
 
           <p
-            className="text-[1.05rem] leading-[1.65] mb-6"
-            style={{ color: "rgba(240,240,232,0.5)" }}
+            className="mb-6 text-[0.95rem] leading-[1.7]"
+            style={{ color: "var(--ws-ink-faint)", fontFamily: "var(--font-space-mono), monospace" }}
           >
             {tagline}
           </p>
@@ -92,8 +110,14 @@ export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections 
             {tags.map((t) => (
               <span
                 key={t}
-                className="rounded px-3 py-1 text-xs"
-                style={{ backgroundColor: "rgba(240,240,232,0.08)" }}
+                className="text-xs"
+                style={{
+                  padding: "0.2rem 0.55rem",
+                  backgroundColor: "rgba(46,61,38,0.10)",
+                  color: "var(--ws-sage-mid)",
+                  fontFamily: "var(--font-space-mono), monospace",
+                  letterSpacing: "0.02em",
+                }}
               >
                 {t}
               </span>
@@ -103,14 +127,17 @@ export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections 
 
         {/* Sections */}
         <div
-          className="pt-12 space-y-14"
-          style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
+          className="space-y-14 pt-12"
+          style={{ borderTop: "1px solid rgba(28,26,20,0.08)" }}
         >
           {sections.map((s) => (
             <section key={s.title}>
               <p
-                className="text-xs uppercase tracking-widest mb-5"
-                style={{ color: "rgba(240,240,232,0.28)" }}
+                className="mb-5 text-xs uppercase tracking-widest"
+                style={{
+                  color: "var(--ws-sage-muted)",
+                  fontFamily: "var(--font-space-mono), monospace",
+                }}
               >
                 {s.title}
               </p>

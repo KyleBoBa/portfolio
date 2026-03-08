@@ -21,7 +21,7 @@ export default function FuchsDash() {
           content: (
             <p
               className="text-[1rem] leading-[1.85]"
-              style={{ color: "rgba(240,240,232,0.76)" }}
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               Built for FUCHS SE, as part of the course DD1367, this system monitors and visualizes the real-time
               flow of chemical samples through a lab process pipeline. A Python service reads sensor
@@ -40,9 +40,9 @@ export default function FuchsDash() {
                 <li
                   key={f}
                   className="flex items-start gap-3 text-[0.95rem]"
-                  style={{ color: "rgba(240,240,232,0.7)", lineHeight: 1.8 }}
+                  style={{ color: "var(--ws-ink)", lineHeight: 1.8, fontFamily: "var(--font-space-mono), monospace" }}
                 >
-                  <span style={{ color: "rgba(240,240,232,0.25)", flexShrink: 0, marginTop: 3 }}>—</span>
+                  <span style={{ color: "var(--ws-sage-muted)", flexShrink: 0, marginTop: 3 }}>—</span>
                   {f}
                 </li>
               ))}
@@ -54,7 +54,7 @@ export default function FuchsDash() {
           content: (
             <p
               className="text-[1rem] leading-[1.85]"
-              style={{ color: "rgba(240,240,232,0.76)" }}
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               Four-layer stack: FUCHS DB (proprietary) → Python ingestion service → PostgreSQL →
               Next.js. The python layer abstracts away the lab database format so the rest of the

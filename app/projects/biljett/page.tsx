@@ -21,7 +21,7 @@ export default function Biljett() {
           content: (
             <p
               className="text-[1rem] leading-[1.85]"
-              style={{ color: "rgba(240,240,232,0.76)" }}
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               SL (Stockholm&apos;s public transit) sells tickets at several durations — and the cheapest
               option for a given trip period is not always obvious. A 7-day pass might be cheaper
@@ -39,9 +39,9 @@ export default function Biljett() {
                 <li
                   key={f}
                   className="flex items-start gap-3 text-[0.95rem]"
-                  style={{ color: "rgba(240,240,232,0.7)", lineHeight: 1.8 }}
+                  style={{ color: "var(--ws-ink)", lineHeight: 1.8, fontFamily: "var(--font-space-mono), monospace" }}
                 >
-                  <span style={{ color: "rgba(240,240,232,0.25)", flexShrink: 0, marginTop: 3 }}>—</span>
+                  <span style={{ color: "var(--ws-sage-muted)", flexShrink: 0, marginTop: 3 }}>—</span>
                   {f}
                 </li>
               ))}
@@ -53,7 +53,7 @@ export default function Biljett() {
           content: (
             <p
               className="text-[1rem] leading-[1.85]"
-              style={{ color: "rgba(240,240,232,0.76)" }}
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               Each ticket type maps to a duration (days covered) and a cost. The DP table tracks
               the minimum cost to cover every number of days from 0 up to a safe maximum, with

@@ -3,15 +3,35 @@
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 
+const TAPE_COLORS = ["#e4c820", "#6120e4", "#e4208f", "#39b828", "#2ca5c7"];
+
+function tapeColorForName(name: string): string {
+  const hash = name.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return TAPE_COLORS[hash % TAPE_COLORS.length];
+}
+
 interface Props {
   name: string;
   description: string;
   tags: string[];
   href: string;
   rotation?: number;
+  /** Show a large watermark index number (used on /projects listing) */
+  index?: number;
+  /** Enables view-transition click + sets viewTransitionName on the heading */
+  viewTransitionSlug?: string;
 }
 
-export function PaperProjectCard({ name, description, tags, href, rotation = 0 }: Props) {
+export function PaperProjectCard({
+  name,
+  description,
+  tags,
+  href,
+  rotation = 0,
+  index,
+  viewTransitionSlug,
+}: Props) {
+  const tapeColor = tapeColorForName(name);
   const router = useRouter();
   const cardRef = useRef<HTMLAnchorElement>(null);
   const isNavigable = href !== "#";
@@ -19,30 +39,46 @@ export function PaperProjectCard({ name, description, tags, href, rotation = 0 }
   const handleClick = (e: React.MouseEvent) => {
     if (!isNavigable) return;
     e.preventDefault();
+
+    if (viewTransitionSlug) {
+      // Projects listing: shared-element expand transition
+      document.documentElement.dataset.navDir = "expand";
+      if ("startViewTransition" in document) {
+        (document as Document & { startViewTransition: (cb: () => void) => void })
+          .startViewTransition(() => router.push(href));
+      } else {
+        router.push(href);
+      }
+      return;
+    }
+
+    // Home featured cards: fold-down animation
     const card = cardRef.current;
     if (!card) { router.push(href); return; }
-
     card.style.transition = "transform 0.42s cubic-bezier(0.4, 0, 1, 1), opacity 0.42s ease";
     card.style.transformOrigin = "bottom center";
     card.style.transform = `rotate(${rotation}deg) perspective(900px) rotateX(-88deg)`;
     card.style.opacity = "0";
-
     setTimeout(() => router.push(href), 440);
   };
 
   return (
-    <div style={{ perspective: "1000px" }}>
+    /* paddingTop creates room for the tape to overflow above */
+    <div style={{ perspective: "1000px", paddingTop: "18px", overflow: "visible" }}>
       <a
         ref={cardRef}
         href={href}
         onClick={handleClick}
         style={{
           display: "block",
-          background: "#f4efe5",
-          color: "#1c1c16",
-          padding: "2rem 2rem 1.75rem",
           position: "relative",
-          boxShadow: "0 8px 32px rgba(0,0,0,0.38)",
+          overflow: "visible",
+          background: "#f9f5ed",
+          backgroundImage:
+            "repeating-linear-gradient(to bottom, transparent, transparent 27px, rgba(175,158,130,0.20) 27px, rgba(175,158,130,0.20) 28px)",
+          color: "#1c1a14",
+          padding: "2.25rem 1.75rem 1.75rem",
+          boxShadow: "0 6px 24px rgba(50,35,10,0.18), 0 2px 6px rgba(50,35,10,0.10)",
           transform: `rotate(${rotation}deg)`,
           transition: "box-shadow 0.22s, transform 0.22s",
           textDecoration: "none",
@@ -51,33 +87,77 @@ export function PaperProjectCard({ name, description, tags, href, rotation = 0 }
         onMouseEnter={(e) => {
           if (!isNavigable) return;
           const el = e.currentTarget;
-          el.style.boxShadow = "0 18px 52px rgba(0,0,0,0.52)";
-          el.style.transform = `rotate(${rotation}deg) translateY(-7px)`;
+          el.style.boxShadow = "0 16px 48px rgba(50,35,10,0.26), 0 4px 12px rgba(50,35,10,0.14)";
+          el.style.transform = `rotate(${rotation}deg) translateY(-8px)`;
         }}
         onMouseLeave={(e) => {
           if (!isNavigable) return;
           const el = e.currentTarget;
-          el.style.boxShadow = "0 8px 32px rgba(0,0,0,0.38)";
+          el.style.boxShadow = "0 6px 24px rgba(50,35,10,0.18), 0 2px 6px rgba(50,35,10,0.10)";
           el.style.transform = `rotate(${rotation}deg)`;
         }}
       >
-        {/* Tape strip */}
+        {/* Tape strip — hardcoded amber so it always resolves */}
         <div
           aria-hidden
           style={{
             position: "absolute",
-            top: -13,
+            top: -18,
             left: "50%",
             transform: "translateX(-50%)",
-            width: 68,
+            width: 72,
             height: 22,
-            background: "rgba(238, 212, 42, 0.72)",
+            zIndex: 10,
+            backgroundColor: tapeColor,
+            opacity: 0.82,
+            backgroundImage:
+              "repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px)",
           }}
         />
 
-        <h3 style={{ fontSize: "1.2rem", marginBottom: "0.7rem", fontFamily: "inherit" }}>{name}</h3>
+        {/* Optional watermark index number */}
+        {index !== undefined && (
+          <span
+            aria-hidden
+            style={{
+              position: "absolute",
+              bottom: "-0.75rem",
+              right: "1rem",
+              fontSize: "6rem",
+              lineHeight: 1,
+              color: "rgba(28,26,20,0.25)",
+              fontFamily: "var(--font-russo-one), sans-serif",
+              pointerEvents: "none",
+              userSelect: "none",
+            }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        )}
 
-        <p style={{ fontSize: "0.88rem", lineHeight: 1.75, color: "rgba(28,28,22,0.62)", marginBottom: "1.2rem" }}>
+        <h3
+          style={{
+            fontSize: "1.1rem",
+            marginBottom: "0.65rem",
+            fontFamily: "var(--font-russo-one), sans-serif",
+            color: "#1c1a14",
+            ...(viewTransitionSlug
+              ? ({ viewTransitionName: `project-${viewTransitionSlug}` } as React.CSSProperties)
+              : {}),
+          }}
+        >
+          {name}
+        </h3>
+
+        <p
+          style={{
+            fontSize: "0.82rem",
+            lineHeight: 1.8,
+            color: "rgba(28,26,20,0.52)",
+            marginBottom: "1.25rem",
+            fontFamily: "var(--font-space-mono), monospace",
+          }}
+        >
           {description}
         </p>
 
@@ -86,11 +166,12 @@ export function PaperProjectCard({ name, description, tags, href, rotation = 0 }
             <span
               key={t}
               style={{
-                padding: "0.2rem 0.55rem",
-                fontSize: "0.68rem",
-                background: "rgba(28,28,22,0.08)",
-                borderRadius: 3,
-                fontFamily: "inherit",
+                padding: "0.18rem 0.5rem",
+                fontSize: "0.65rem",
+                background: "rgba(46,61,38,0.10)",
+                color: "#4a5e3c",
+                fontFamily: "var(--font-space-mono), monospace",
+                letterSpacing: "0.02em",
               }}
             >
               {t}
@@ -98,7 +179,13 @@ export function PaperProjectCard({ name, description, tags, href, rotation = 0 }
           ))}
         </div>
 
-        <span style={{ fontSize: "0.82rem", color: isNavigable ? "rgba(28,28,22,0.42)" : "rgba(28,28,22,0.28)" }}>
+        <span
+          style={{
+            fontSize: "0.78rem",
+            fontFamily: "var(--font-space-mono), monospace",
+            color: isNavigable ? "rgba(28,26,20,0.36)" : "rgba(28,26,20,0.22)",
+          }}
+        >
           {isNavigable ? "view project →" : "coming soon"}
         </span>
       </a>

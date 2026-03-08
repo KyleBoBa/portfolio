@@ -1,8 +1,9 @@
 import { Navbar } from "@/components/Navbar";
+import { MapPin } from "lucide-react";
 
 const SKILLS = [
   { name: "typescript",  logo: "https://cdn.simpleicons.org/typescript/3178C6" },
-  { name: "next.js",     logo: "https://cdn.simpleicons.org/nextdotjs/f0f0e8" },
+  { name: "next.js",     logo: "https://cdn.simpleicons.org/nextdotjs/1c1a14" },
   { name: "react",       logo: "https://cdn.simpleicons.org/react/61DAFB" },
   { name: "python",      logo: "https://cdn.simpleicons.org/python/FFD43B" },
   { name: "postgres",    logo: "https://cdn.simpleicons.org/postgresql/4169E1" },
@@ -10,92 +11,137 @@ const SKILLS = [
   { name: "git",         logo: "https://cdn.simpleicons.org/git/F05032" },
 ];
 
-const FACTS = [
+const FACTS: { id: string; label: React.ReactNode; content: React.ReactNode }[] = [
   {
+    id: "working-on",
     label: "currently working on",
     content: (
       <>
-        <a href="/projects/fuchsdash" className="underline">project fuchs</a>
+        <a href="/projects/fuchsdash" className="underline" style={{ color: "var(--ws-cream)" }}>project fuchs</a>
         <br />
-        <a href="/projects/biljett" className="underline">biljett</a>
+        <a href="/projects/biljett" className="underline" style={{ color: "var(--ws-cream)" }}>biljett</a>
         <br />
         and this website!
       </>
     ),
   },
-  { label: "currently studying",  content: "3rd year of engineering & education programme" },
-  { label: "based in",            content: "Stockholm, Sweden" },
-  { label: "interests",           content: "full-stack development, education technology, chemical process systems" },
+  {
+    id: "studying",
+    label: "currently studying",
+    content: "3rd year of engineering & education programme",
+  },
+  {
+    id: "based-in",
+    label: (
+      <span className="flex items-center gap-1.5">
+        based in <MapPin size={13} style={{ display: "inline-block", flexShrink: 0 }} />
+      </span>
+    ),
+    content: "Stockholm, Sweden",
+  },
+  {
+    id: "interests",
+    label: "interests",
+    content: "full-stack development, educational technology, deadlock",
+  },
 ];
 
 export default function About() {
   return (
     <div
       className="min-h-screen"
-      style={{
-        background: "linear-gradient(170deg, #333d29 0%, #2c3424 45%, #242c1e 100%)",
-        color: "#f0f0e8",
-      }}
+      style={{ backgroundColor: "var(--ws-sage)", color: "var(--ws-cream)" }}
     >
       <Navbar />
 
-      <main className="page-slide-enter mx-auto max-w-6xl px-10 pt-36 pb-24">
+      <main className="page-slide-enter mx-auto max-w-7xl px-10 pb-24 pt-20">
         {/* Heading */}
-        <div className="mb-16">
-          <h1 className="text-[3rem] mb-4">about.</h1>
-          <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
+        <div className="mb-16 px-16">
+          <h1 className="mb-3 text-[2.8rem]">about.</h1>
+          <div style={{ width: 36, height: 2, backgroundColor: "var(--ws-sage-muted)" }} />
         </div>
 
         {/* Bio */}
-        <div className="grid grid-cols-[1fr_1fr] gap-16 mb-20">
-          {/* Left — bio text in a subtle panel */}
+        <div className="grid grid-cols-1 gap-14 mb-20 sm:grid-cols-2">
+          {/* Left — bio text on paper card */}
           <div
-            className="space-y-5 rounded-lg px-8 py-7"
+            className="space-y-5"
             style={{
-              backgroundColor: "rgba(54,64,48,0.45)",
-              border: "1px solid rgba(198,202,181,0.1)",
+              backgroundColor: "var(--ws-paper)",
+              backgroundImage:
+                "repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(175,158,130,0.16) 31px, rgba(175,158,130,0.16) 32px)",
+              padding: "2rem 1.75rem",
+              boxShadow: "0 4px 18px rgba(50,35,10,0.30), 0 1px 4px rgba(50,35,10,0.15)",
             }}
           >
-            <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
-              I&apos;m <span style={{ color: "rgba(238, 212, 42, 0.80)" }}>kyle boström balthazar</span> — an{" "}
+            <p
+              className="text-[1rem] leading-[2]"
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
+            >
+              I&apos;m{" "}
+              <strong className="tracking-widest" style={{ color: "var(--ws-sage)", fontFamily: "var(--font-russo-one), sans-serif" }}>
+                Kyle Boström Balthazar
+              </strong>{" "}
+              — an{" "}
               <a
                 href="https://www.kth.se/utbildning/civilingenjor/civing-larare/civilingenjor-och-larare-300-hp-1.4108"
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: "rgba(238, 212, 42, 0.80)" }}
+                style={{ color: "var(--ws-sage)", textDecoration: "underline" }}
               >
                 engineering and teaching student
               </a>{" "}
-              studying at <span style={{ color: "rgba(238, 212, 42, 0.72)" }}>KTH</span> Royal Institute of Technology in <span style={{ color: "rgba(238, 212, 42, 0.72)" }}>Stockholm, Sweden</span>.{" "}
-              When focus on my projects, I spend my time picking up knowledge and skills for the web, studying, and thinking
-              about how software can make learning more effective.
+              studying at{" "}
+              <strong style={{ color: "var(--ws-sage)" }}>KTH</strong> Royal Institute of
+              Technology in{" "}
+              <strong style={{ color: "var(--ws-sage)" }}>Stockholm, Sweden</strong>.{" "}
+              When focused on my projects, I spend my time picking up knowledge and skills for the
+              web, studying, and thinking about how software can make learning more effective.
             </p>
-            <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
+            <p
+              className="text-[1rem] leading-[2]"
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
+            >
               Teaching has made me a better developer. Breaking complex problems into clear,
-              digestible steps is a skill that transfers directly to writing clean, readable code.
+              digestible steps transfers directly to writing clean, readable code.
             </p>
-            <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
-              Outside of school and projects, I enjoy playing video games (as you might have guessed by the easter eggs), 
-              finding recipes to cook or bake, reading books (currently reading The Witcher - Baptism of Fire) 
-              and spending time with friends.
+            <p
+              className="text-[1rem] leading-[2]"
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
+            >
+              Outside of school and projects, I enjoy playing video games (you might notice the
+              easter eggs), finding recipes to cook or bake, reading books — currently The Witcher:
+              Baptism of Fire — and spending time with friends.
             </p>
-            <p className="text-[1.1rem] leading-[1.85]" style={{ color: "rgba(240,240,232,0.82)" }}>
-              Feel free to take a look at my projects, or reach out if you want to know more
-              about my experience and skill set!
+            <p
+              className="text-[1rem] leading-[2]"
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
+            >
+              Feel free to take a look at my projects, or reach out if you want to know more about
+              my experience and skill set!
             </p>
           </div>
 
-          {/* Right — quick facts with sage accent borders */}
-          <div className="space-y-8 pt-2">
-            {FACTS.map(({ label, content }) => (
+          {/* Right — quick facts */}
+          <div className="space-y-8 pt-1">
+            {FACTS.map(({ id, label, content }) => (
               <div
-                key={label}
-                style={{ borderLeft: "2px solid rgba(107,125,91,0.55)", paddingLeft: "1rem" }}
+                key={id}
+                style={{
+                  borderLeft: "2px solid var(--ws-sage-mid)",
+                  paddingLeft: "1rem",
+                }}
               >
-                <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "rgba(240,240,232,0.4)" }}>
+                <p
+                  className="text-xs mb-1.5 uppercase tracking-widest"
+                  style={{ color: "rgba(244,240,230,0.65)", fontFamily: "var(--font-space-mono), monospace" }}
+                >
                   {label}
                 </p>
-                <p className="text-[1.05rem]" style={{ color: "rgba(240,240,232,0.82)" }}>
+                <p
+                  className="text-[1.05rem]"
+                  style={{ color: "var(--ws-cream)", fontFamily: "var(--font-space-mono), monospace" }}
+                >
                   {content}
                 </p>
               </div>
@@ -104,29 +150,56 @@ export default function About() {
         </div>
 
         {/* Skills */}
-        <div className="pt-16" style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}>
-          <div className="flex items-center justify-between mb-10">
-            <h2 className="text-[2rem]">tech stack.</h2>
-            <a href="/projects" className="text-[1rem]">
+        <div
+          className="pt-14 px-16"
+          style={{ borderTop: "1px solid rgba(244,240,230,0.08)" }}
+        >
+          <div className="mb-8 flex items-center justify-between">
+            <h2 className="text-[1.8rem]">tech stack.</h2>
+            <a
+              href="/projects"
+              className="text-[0.88rem] transition-opacity hover:opacity-55"
+              style={{ color: "var(--ws-cream)", fontFamily: "var(--font-space-mono), monospace" }}
+            >
               see them in use →
             </a>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2.5">
             {SKILLS.map(({ name, logo }) => (
               <span
                 key={name}
-                className="rounded px-4 py-2 text-sm flex items-center gap-2"
+                className="flex items-center gap-2 text-xs"
                 style={{
-                  backgroundColor: "rgba(54,64,48,0.7)",
-                  border: "1px solid rgba(107,125,91,0.3)",
-                  color: "#f0f0e8",
+                  backgroundColor: "rgba(64,76,54,0.65)",
+                  border: "1px solid rgba(198,202,181,0.18)",
+                  color: "var(--ws-cream)",
+                  padding: "0.4rem 0.75rem",
+                  fontFamily: "var(--font-space-mono), monospace",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logo} alt="" width={16} height={16} style={{ objectFit: "contain", flexShrink: 0 }} />
+                <img
+                  src={logo}
+                  alt=""
+                  width={14}
+                  height={14}
+                  style={{ objectFit: "contain", flexShrink: 0 }}
+                />
                 {name}
               </span>
             ))}
+            <span
+              className="flex items-center gap-2 text-xs"
+              style={{
+                backgroundColor: "rgba(64,76,54,0.65)",
+                border: "1px solid rgba(198,202,181,0.18)",
+                color: "var(--ws-cream)",
+                padding: "0.4rem 0.75rem",
+                fontFamily: "var(--font-space-mono), monospace",
+              }}
+            >
+              and more
+            </span>
           </div>
         </div>
       </main>

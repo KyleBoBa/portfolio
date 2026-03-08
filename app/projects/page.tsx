@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ExternalLink } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
+import { PaperProjectCard } from "@/components/PaperProjectCard";
 
 const PROJECTS = [
   {
@@ -12,6 +10,7 @@ const PROJECTS = [
       "real-time dashboard for chemical sample flow analysis. full-stack with live data, microsoft OAuth, and a python ingestion service.",
     tags: ["next.js", "typescript", "postgres", "docker", "prisma", "tailwind", "python"],
     href: "/projects/fuchsdash",
+    slug: "fuchsdash",
   },
   {
     name: "movie search.",
@@ -19,6 +18,7 @@ const PROJECTS = [
       "react SPA for searching and saving movies from an external API. favorites managed with context API, client-side routing with react router.",
     tags: ["react", "javascript", "vite", "react router", "css"],
     href: "/projects/movie-search",
+    slug: "movie-search",
   },
   {
     name: "biljett.",
@@ -26,6 +26,7 @@ const PROJECTS = [
       "CLI tool that finds the cheapest SL (stockholm transit) ticket combination for any travel period. dynamic programming, coin-change variant.",
     tags: ["python"],
     href: "/projects/biljett",
+    slug: "biljett",
   },
   {
     name: "shell.",
@@ -33,149 +34,101 @@ const PROJECTS = [
       "POSIX-compliant shell built from scratch in python. builtins, PATH resolution, subprocess execution — a CodeCrafters challenge.",
     tags: ["python", "systems"],
     href: "/projects/shell",
+    slug: "shell",
   },
 ];
+
+const ROTATIONS = [-1.4, 0.9, -0.6, 1.1];
 
 export default function Projects() {
   return (
     <div
       className="min-h-screen"
-      style={{
-        background: "linear-gradient(170deg, #333d29 0%, #2c3424 45%, #242c1e 100%)",
-        color: "#f0f0e8",
-      }}
+      style={{ backgroundColor: "#2e3d26", color: "#f4f0e6" }}
     >
       <Navbar />
 
-      <main className="page-slide-enter mx-auto max-w-6xl px-10 pt-36 pb-24">
+      <main className="page-slide-enter mx-auto max-w-6xl px-10 pb-28 pt-36">
         {/* Heading */}
-        <div className="mb-16">
-          <h1 className="text-[3rem] mb-4">projects.</h1>
-          <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
+        <div className="mb-20">
+          <h1 className="mb-3 text-[2.8rem]">projects.</h1>
+          <div style={{ width: 36, height: 2, backgroundColor: "#7a9068" }} />
         </div>
 
-        <div className="grid grid-cols-2 gap-6" style={{ perspective: "1200px" }}>
+        {/* Paper cards grid — extra top padding for tape strips */}
+        <div className="grid grid-cols-1 gap-16 sm:grid-cols-2">
           {PROJECTS.map((p, i) => (
-            <ProjectCard key={p.name} index={i} {...p} />
+            <PaperProjectCard
+              key={p.name}
+              name={p.name}
+              description={p.description}
+              tags={p.tags}
+              href={p.href}
+              rotation={ROTATIONS[i % ROTATIONS.length]}
+              index={i}
+              viewTransitionSlug={p.slug}
+            />
           ))}
-        </div>
-        {/* a card where it says more to come */}
-        <div className="relative block rounded-xl p-7 overflow-hidden transition-all duration-200"
-          style={{
-            background: "linear-gradient(145deg, rgba(54,64,48,0.5) 0%, rgba(28,35,21,0.4) 100%)",
-            border: "1px solid rgba(198,202,181,0.1)",
-          }}
-        >
-          <div className="mb-4 flex items-start justify-between">
-            <h3 className="text-[1.15rem]">more to come...</h3>
-          </div>
-          <p
-            className="mb-5 text-sm leading-[1.75]"
-            style={{ color: "rgba(240,240,232,0.62)" }}
-          >
-            i&apos;m always working on new projects and ideas, so stay tuned for updates!
-          </p>
+
+          {/* Placeholder card */}
+          <PlaceholderCard rotation={ROTATIONS[PROJECTS.length % ROTATIONS.length]} />
         </div>
       </main>
     </div>
   );
 }
 
-function ProjectCard({
-  name,
-  description,
-  tags,
-  href,
-  index,
-}: {
-  name: string;
-  description: string;
-  tags: string[];
-  href: string;
-  index: number;
-}) {
-  const [hovered, setHovered] = useState(false);
-  const router = useRouter();
-  const slug = href.split("/").pop() ?? index.toString();
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    document.documentElement.dataset.navDir = "expand";
-    if ("startViewTransition" in document) {
-      (document as any).startViewTransition(() => router.push(href));
-    } else {
-      router.push(href);
-    }
-  };
-
+function PlaceholderCard({ rotation }: { rotation: number }) {
   return (
-    <a
-      href={href}
-      onClick={handleClick}
-      className="relative block rounded-xl p-7 overflow-hidden transition-all duration-200"
-      style={{
-        background: hovered
-          ? "linear-gradient(145deg, rgba(60,72,50,0.75) 0%, rgba(32,40,25,0.65) 100%)"
-          : "linear-gradient(145deg, rgba(54,64,48,0.5) 0%, rgba(28,35,21,0.4) 100%)",
-        border: hovered
-          ? "1px solid rgba(107,125,91,0.45)"
-          : "1px solid rgba(198,202,181,0.1)",
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Faint background index number */}
-      <span
-        aria-hidden
+    <div style={{ perspective: "1000px", paddingTop: "18px", overflow: "visible" }}>
+      <div
         style={{
-          position: "absolute",
-          bottom: "-1rem",
-          right: "1.25rem",
-          fontSize: "7rem",
-          lineHeight: 1,
-          color: "rgba(198,202,181,0.07)",
-          pointerEvents: "none",
-          userSelect: "none",
+          position: "relative",
+          overflow: "visible",
+          background: "#f9f5ed",
+          padding: "2.25rem 1.75rem 1.75rem",
+          boxShadow: "0 4px 16px rgba(50,35,10,0.10), 0 1px 4px rgba(50,35,10,0.06)",
+          transform: `rotate(${rotation}deg)`,
+          border: "1.5px dashed rgba(28,26,20,0.14)",
         }}
       >
-        {String(index + 1).padStart(2, "0")}
-      </span>
-
-      <div className="mb-4 flex items-start justify-between">
-        <h3
-          className="text-[1.15rem]"
-          style={{ viewTransitionName: `project-${slug}` } as React.CSSProperties}
-        >{name}</h3>
-        <ExternalLink
-          size={15}
-          className="mt-0.5 transition-opacity duration-200"
+        <div
+          aria-hidden
           style={{
-            color: "rgba(240,240,232,0.5)",
-            opacity: hovered ? 1 : 0,
+            position: "absolute",
+            top: -18,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 72,
+            height: 22,
+            zIndex: 10,
+            backgroundColor: "#e4c820",
+            opacity: 0.82,
+            backgroundImage:
+              "repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 4px)",
           }}
         />
+        <h3
+          style={{
+            fontSize: "1.1rem",
+            marginBottom: "0.65rem",
+            fontFamily: "var(--font-russo-one), sans-serif",
+            color: "rgba(28,26,20,0.35)",
+          }}
+        >
+          more to come...
+        </h3>
+        <p
+          style={{
+            fontSize: "0.82rem",
+            lineHeight: 1.8,
+            color: "rgba(28,26,20,0.28)",
+            fontFamily: "var(--font-space-mono), monospace",
+          }}
+        >
+          always working on new projects and ideas. stay tuned.
+        </p>
       </div>
-      <p
-        className="mb-5 text-sm leading-[1.75]"
-        style={{ color: "rgba(240,240,232,0.62)" }}
-      >
-        {description}
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded px-3 py-1 text-xs"
-            style={{
-              backgroundColor: "rgba(107,125,91,0.2)",
-              border: "1px solid rgba(107,125,91,0.25)",
-              color: "rgba(240,240,232,0.75)",
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </a>
+    </div>
   );
 }

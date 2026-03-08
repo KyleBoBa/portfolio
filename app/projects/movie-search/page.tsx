@@ -21,7 +21,7 @@ export default function MovieSearch() {
           content: (
             <p
               className="text-[1rem] leading-[1.85]"
-              style={{ color: "rgba(240,240,232,0.76)" }}
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               A frontend-only web app for browsing movies. You type a title, it fetches matching
               results from a movie database API, and displays them as cards. The main purpose was
@@ -39,9 +39,9 @@ export default function MovieSearch() {
                 <li
                   key={f}
                   className="flex items-start gap-3 text-[0.95rem]"
-                  style={{ color: "rgba(240,240,232,0.7)", lineHeight: 1.8 }}
+                  style={{ color: "var(--ws-ink)", lineHeight: 1.8, fontFamily: "var(--font-space-mono), monospace" }}
                 >
-                  <span style={{ color: "rgba(240,240,232,0.25)", flexShrink: 0, marginTop: 3 }}>—</span>
+                  <span style={{ color: "var(--ws-sage-muted)", flexShrink: 0, marginTop: 3 }}>—</span>
                   {f}
                 </li>
               ))}
@@ -53,7 +53,7 @@ export default function MovieSearch() {
           content: (
             <p
               className="text-[1rem] leading-[1.85]"
-              style={{ color: "rgba(240,240,232,0.76)" }}
+              style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               Straightforward project, but useful for practicing the React mental model — lifting
               state, context providers, and the separation between presentational components

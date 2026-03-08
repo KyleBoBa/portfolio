@@ -18,20 +18,20 @@ const FEATURED_PROJECTS = [
     description: "a dashboard for the sample flow and analysis of a chemical process. real-time data, auth, and full-stack infra.",
     tags: ["next.js", "typescript", "postgres", "docker", "prisma", "tailwind", "python"],
     href: "/projects/fuchsdash",
-    rotation: -0.6,
+    rotation: -1.2,
   },
   {
     name: "movie search.",
     description: "react SPA for searching and saving movies from an external API. favorites via context API, client-side routing with react router.",
     tags: ["react", "javascript", "vite", "react router"],
     href: "/projects/movie-search",
-    rotation: 0.5,
+    rotation: 0.8,
   },
 ];
 
 const HOME_SKILLS = [
   { name: "typescript",  logo: "https://cdn.simpleicons.org/typescript/3178C6" },
-  { name: "next.js",     logo: "https://cdn.simpleicons.org/nextdotjs/f0f0e8" },
+  { name: "next.js",     logo: "https://cdn.simpleicons.org/nextdotjs/f4f0e6" },
   { name: "react",       logo: "https://cdn.simpleicons.org/react/61DAFB" },
   { name: "tailwindcss", logo: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
   { name: "python",      logo: "https://cdn.simpleicons.org/python/FFD43B" },
@@ -55,12 +55,26 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen page-slide-enter" style={{ backgroundColor: "#2c3424", color: "#f0f0e8" }}>
+    <div className="min-h-screen page-slide-enter" style={{ backgroundColor: "var(--ws-sage)", color: "var(--ws-cream)" }}>
       <Navbar poweredCount={powered.size} onContactClick={scrollToContact} />
 
-      {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="relative flex min-h-screen items-center pb-16 pt-24 overflow-hidden">
-        {/* Generator spots — scattered around hero */}
+      {/* ── Hero — dark sage wall ──────────────────────── */}
+      <section
+        className="relative overflow-hidden"
+        style={{ backgroundColor: "var(--ws-sage)", color: "var(--ws-cream)" }}
+      >
+        {/* Amber lamp glow — upper right corner */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            background: "radial-gradient(ellipse at 88% 10%, rgba(200,128,8,0.24) 0%, transparent 55%)",
+          }}
+        />
+
+        {/* Generator spots scattered in hero */}
         <div className="absolute top-32 right-16 z-10">
           <GeneratorSpot id={0} powered={powered.has(0)} onPower={handlePower} />
         </div>
@@ -71,90 +85,117 @@ export default function Home() {
           <GeneratorSpot id={2} powered={powered.has(2)} onPower={handlePower} />
         </div>
 
-        <div className="mx-auto w-full max-w-6xl px-10">
-          <div className="grid grid-cols-[1fr_1fr] items-center gap-16">
+        <div
+          className="mx-auto w-full max-w-6xl px-10"
+          style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "7rem", paddingBottom: "4rem" }}
+        >
+          <div className="grid w-full grid-cols-1 items-center gap-16 sm:grid-cols-2">
 
             {/* left — text */}
-            <div className="space-y-10">
-              <div className="space-y-7 text-center">
-                <h1 className="text-[2.75rem] leading-[1.08]">
-                  Welcome to kyles site.
-                </h1>
-                <div className="space-y-5">
-                  <p className="text-[1.5rem] leading-[1.45]">
+            <div className="space-y-8 text-center sm:text-left">
+              <div className="space-y-5">
+                <div>
+                  <h1 className="text-[2.6rem] leading-[1.08] sm:text-[2.6rem]">
+                    Welcome to kyles site.
+                  </h1>
+                  <div style={{ width: 36, height: 2, backgroundColor: "var(--ws-sage-muted)", marginTop: "0.6rem" }} />
+                </div>
+                <div className="space-y-4">
+                  <p
+                    className="text-[1.15rem] leading-[1.65]"
+                    style={{ color: "rgba(244,240,230,0.75)", fontFamily: "var(--font-space-mono), monospace" }}
+                  >
                     Hiya! I&apos;m a 21 yo engineering and
                     <br />
                     education student specializing in system architecture.
                   </p>
-                  <p className="text-[1.5rem] leading-[1.45]">
-                    I dedicate a lot of time to exploring open-source projects 
+                  <p
+                    className="text-[1.15rem] leading-[1.65]"
+                    style={{ color: "rgba(244,240,230,0.75)", fontFamily: "var(--font-space-mono), monospace" }}
+                  >
+                    I dedicate a lot of time to exploring open-source projects
                     to learn how things are built and integrated.
                   </p>
                 </div>
               </div>
+
               {/* action bar */}
               <div
-                className="flex h-20 w-full items-center gap-4 px-4"
-                style={{ backgroundColor: "#d9d9d9" }}
+                className="flex flex-wrap items-center gap-4"
+                style={{
+                  backgroundColor: "rgba(14,13,10,0.70)",
+                  padding: "0.85rem 1.25rem",
+                  border: "1px solid rgba(244,240,230,0.08)",
+                }}
               >
-                <div 
-                  className="flex items-center gap-5 px-2 py-2"
-                  style={{ backgroundColor: "#181818", color: "#f0f0e8" }}>
-                  <p className="px-2">resume</p>
+                <span
+                  style={{
+                    fontSize: "0.68rem",
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: "rgba(244,240,230,0.80)",
+                    fontFamily: "var(--font-space-mono), monospace",
+                  }}
+                >
+                  resume
+                </span>
+
+                {[
+                  { label: "sv",  file: "/cv-sv.pdf",  name: "Kyle_Bostrom_Balthazar_CV(sv).pdf" },
+                  { label: "eng", file: "/cv-eng.pdf", name: "Kyle_Bostrom_Balthazar_CV(eng).pdf" },
+                ].map(({ label, file, name }) => (
                   <a
-                    href="/cv-sv.pdf"
-                    download="Kyle_Bostrom_Balthazar_CV(sv).pdf"
-                    className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-[1.05rem] transition-colors"
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#000")}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#181818")}
+                    key={label}
+                    href={file}
+                    download={name}
+                    className="flex items-center gap-2 transition-opacity hover:opacity-60"
+                    style={{
+                      color: "var(--ws-cream)",
+                      fontSize: "0.85rem",
+                      fontFamily: "var(--font-space-mono), monospace",
+                      padding: "0.35rem 0.75rem",
+                      border: "1px solid rgba(244,240,230,0.20)",
+                    }}
                   >
-                    sv
-                    <FileText size={20} />
+                    {label} <FileText size={15} />
                   </a>
+                ))}
+
+                {/* Divider */}
+                <div style={{ width: 1, height: 22, backgroundColor: "rgba(244,240,230,0.16)" }} />
+
+                {[
+                  { Icon: Github,   href: "https://github.com/kyleboba" },
+                  { Icon: Linkedin, href: "https://www.linkedin.com/in/kyle-bostr%C3%B6m-balthazar/" },
+                  { Icon: Mail,     href: "mailto:kylebb1@gmail.com" },
+                ].map(({ Icon, href }) => (
                   <a
-                    href="/cv-eng.pdf"
-                    download="Kyle_Bostrom_Balthazar_CV(eng).pdf"
-                    className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-[1.05rem] transition-colors"
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#000")}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#181818")}
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition-opacity hover:opacity-50"
+                    style={{ color: "rgba(244,240,230,0.80)", lineHeight: 0 }}
                   >
-                    eng
-                    <FileText size={20} />
+                    <Icon size={22} />
                   </a>
-                </div>
-                <div className="flex items-center gap-8 pl-4">
-                  {[
-                    { Icon: Github,   href: "https://github.com/kyleboba" },
-                    { Icon: Linkedin, href: "https://www.linkedin.com/in/kyle-bostr%C3%B6m-balthazar/" },
-                    { Icon: Mail,     href: "mailto:kylebb1@gmail.com" },
-                  ].map(({ Icon, href }) => (
-                    <a
-                      key={href}
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="transition-opacity hover:opacity-45"
-                      style={{ color: "#2c3424" }}
-                    >
-                      <Icon size={26} />
-                    </a>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
 
-            {/* right — photo placeholder */}
-            <div className="flex justify-end space-y-10">
+            {/* right — cream-matted photo placeholder */}
+            <div className="flex justify-center sm:justify-end">
               <div
-                className="flex items-center justify-center"
                 style={{
-                  backgroundColor: "#d9d9d9",
+                  backgroundColor: "var(--ws-cream)",
+                  padding: 50,
                   width: 400,
                   height: 400,
-                  padding: 80,
+                  flexShrink: 0,
+                  boxShadow: "0 10px 36px rgba(0,0,0,0.40)",
                 }}
               >
-                <div style={{ backgroundColor: "#111111", width: "100%", height: "100%" }} />
+                <div style={{ backgroundColor: "#0d0c08", width: "100%", height: "100%" }} />
               </div>
             </div>
           </div>
@@ -165,14 +206,14 @@ export default function Home() {
       <section
         id="skills"
         className="relative py-24"
-        style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
+        style={{ borderTop: "1px solid rgba(244,240,230,0.08)" }}
       >
         <div className="mx-auto max-w-6xl px-10">
           <div className="mb-10">
-            <h2 className="text-[2.8rem] mb-3">most used technologies.</h2>
-            <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
+            <h2 className="mb-3 text-[2.4rem]">most used technologies.</h2>
+            <div style={{ width: 36, height: 2, backgroundColor: "var(--ws-sage-muted)" }} />
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-3">
             {HOME_SKILLS.map(({ name, logo }) => (
               <SkillTile key={name} name={name} logo={logo} />
             ))}
@@ -180,26 +221,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Projects ─────────────────────────────────────── */}
+      {/* ── Projects — pinned paper cards ────────────────── */}
       <section
         id="project"
         className="relative py-28"
+        style={{ borderTop: "1px solid rgba(244,240,230,0.08)" }}
       >
-        {/* 4th generator spot */}
         <div className="absolute top-14 left-1/3 z-10">
           <GeneratorSpot id={3} powered={powered.has(3)} onPower={handlePower} />
         </div>
         <div className="mx-auto max-w-6xl px-10">
-          <div className="flex items-start justify-between mb-14">
+          <div className="mb-14 flex items-start justify-between">
             <div>
-              <h2 className="text-[2.8rem] mb-3">projects.</h2>
-              <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
+              <h2 className="mb-3 text-[2.4rem]">projects.</h2>
+              <div style={{ width: 36, height: 2, backgroundColor: "var(--ws-sage-muted)" }} />
             </div>
-            <a href="/projects" className="text-[1rem] leading-[1.5] transition-opacity hover:opacity-55 mt-3">
+            <a
+              href="/projects"
+              className="mt-3 text-[0.88rem] transition-opacity hover:opacity-55"
+              style={{ color: "rgba(244,240,230,0.45)", fontFamily: "var(--font-space-mono), monospace" }}
+            >
               view all →
             </a>
           </div>
-          <div className="grid grid-cols-2 gap-12 pt-4">
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
             {FEATURED_PROJECTS.map((p) => (
               <PaperProjectCard key={p.name} {...p} />
             ))}
@@ -211,28 +256,30 @@ export default function Home() {
       <section
         id="contact"
         className="relative py-28"
-        style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
+        style={{ borderTop: "1px solid rgba(244,240,230,0.08)" }}
       >
-        {/* 5th generator spot */}
         <div className="absolute top-8 right-20 z-10">
           <GeneratorSpot id={4} powered={powered.has(4)} onPower={handlePower} />
         </div>
 
         <div className="mx-auto max-w-6xl px-10">
           <div className="mb-12">
-            <h2 className="text-[2.8rem] mb-3">contact.</h2>
-            <div style={{ width: 44, height: 2, backgroundColor: "rgba(107,125,91,0.75)" }} />
+            <h2 className="mb-3 text-[2.4rem]">contact.</h2>
+            <div style={{ width: 36, height: 2, backgroundColor: "var(--ws-sage-muted)" }} />
           </div>
-          <div className="grid grid-cols-[1fr_1fr] items-start gap-16">
+          <div className="grid grid-cols-1 items-start gap-16 sm:grid-cols-2">
             <div className="space-y-4">
-              <p className="text-[1.25rem] leading-[1.5]">
+              <p
+                className="text-[1.2rem] leading-[1.55]"
+                style={{ fontFamily: "var(--font-russo-one), sans-serif" }}
+              >
                 Got a project in mind?
                 <br />
                 Let&apos;s build something.
               </p>
               <p
-                className="text-[1rem] leading-[1.75]"
-                style={{ color: "rgba(240,240,232,0.5)" }}
+                className="text-[0.9rem] leading-[1.8]"
+                style={{ color: "rgba(244,240,230,0.52)", fontFamily: "var(--font-space-mono), monospace" }}
               >
                 Open to freelance work, collaborations, and interesting
                 conversations. Reach out through the channels provided.
@@ -245,10 +292,10 @@ export default function Home() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-4 text-[1rem] transition-opacity hover:opacity-55"
-                  style={{ color: "#f0f0e8" }}
+                  className="flex items-center gap-4 text-[0.88rem] transition-opacity hover:opacity-55"
+                  style={{ color: "var(--ws-cream)", fontFamily: "var(--font-space-mono), monospace" }}
                 >
-                  <Icon size={20} />
+                  <Icon size={16} style={{ color: "var(--ws-sage-muted)", flexShrink: 0 }} />
                   <span>{label}</span>
                 </a>
               ))}
@@ -257,19 +304,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Footer ─────────────────────────────────────── */}
+      {/* ── Footer — cream ─────────────────────────────── */}
       <footer
         className="py-8"
-        style={{ borderTop: "1px solid rgba(240,240,232,0.1)" }}
+        style={{ backgroundColor: "var(--ws-cream)", borderTop: "1px solid rgba(28,26,20,0.10)" }}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-10">
-          <span className="text-sm" style={{ color: "rgba(240,240,232,0.3)" }}>
+          <span
+            className="text-xs"
+            style={{ color: "rgba(28,26,20,0.42)", fontFamily: "var(--font-space-mono), monospace" }}
+          >
             kyle bb. — {new Date().getFullYear()}
           </span>
           <button
             onClick={scrollTop}
-            className="text-sm transition-opacity hover:opacity-85"
-            style={{ color: "rgba(240,240,232,0.3)" }}
+            className="text-xs transition-opacity hover:opacity-85"
+            style={{ color: "rgba(28,26,20,0.42)", fontFamily: "var(--font-space-mono), monospace", background: "none", border: "none", padding: 0, cursor: "pointer" }}
           >
             back to top ↑
           </button>
@@ -279,27 +329,28 @@ export default function Home() {
   );
 }
 
+// Corner bracket positions
+const CORNERS = [
+  { top: -5, left: -5 },
+  { top: -5, right: -5 },
+  { bottom: -5, left: -5 },
+  { bottom: -5, right: -5 },
+] as const;
+
 function SkillTile({ name, logo }: { name: string; logo: string }) {
   const [hovered, setHovered] = useState(false);
 
-  const corners = [
-    { top: -5, left: -5 },
-    { top: -5, right: -5 },
-    { bottom: -5, left: -5 },
-    { bottom: -5, right: -5 },
-  ] as const;
-
   return (
     <div
-      className="relative flex flex-col items-center justify-center gap-3 cursor-default"
+      className="relative flex cursor-default flex-col items-center justify-center gap-3"
       style={{
         padding: "1.75rem 1rem",
         background: hovered
-          ? "linear-gradient(145deg, rgba(64,76,54,0.85) 0%, rgba(40,50,32,0.7) 100%)"
+          ? "linear-gradient(145deg, rgba(64,76,54,0.85) 0%, rgba(40,50,32,0.70) 100%)"
           : "linear-gradient(145deg, rgba(44,54,38,0.55) 0%, rgba(32,40,25,0.45) 100%)",
         border: hovered
           ? "1px solid rgba(198,202,181,0.28)"
-          : "1px solid rgba(198,202,181,0.1)",
+          : "1px solid rgba(198,202,181,0.10)",
         transition: "background 200ms, border-color 200ms",
         zIndex: hovered ? 1 : 0,
       }}
@@ -307,7 +358,7 @@ function SkillTile({ name, logo }: { name: string; logo: string }) {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Corner bracket marks */}
-      {corners.map((pos, i) => (
+      {CORNERS.map((pos, i) => (
         <div
           key={i}
           style={{
@@ -336,9 +387,10 @@ function SkillTile({ name, logo }: { name: string; logo: string }) {
         }}
       />
       <span
-        className="text-sm text-center"
+        className="text-center text-sm"
         style={{
-          color: hovered ? "#f0f0e8" : "rgba(240,240,232,0.6)",
+          color: hovered ? "var(--ws-cream)" : "rgba(244,240,230,0.60)",
+          fontFamily: "var(--font-space-mono), monospace",
           transition: "color 200ms",
         }}
       >
