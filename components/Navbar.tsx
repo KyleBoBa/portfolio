@@ -49,28 +49,42 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
   const onLight = !isHome || scrolled;
   const textColor   = onLight ? "#1c1a14" : "#f4f0e6";
   const dotInactive = onLight ? "rgba(28,26,20,0.28)" : "rgba(244,240,230,0.20)";
-  const bgColor     = onLight
-    ? "linear-gradient(to bottom, rgba(244,240,230,0.97) 0%, rgba(244,240,230,0.88) 100%)"
-    : "linear-gradient(to bottom, rgba(46,61,38,0.72) 0%, transparent 100%)";
   const border      = scrolled ? "1px solid rgba(28,26,20,0.10)" : "none";
 
   return (
     <nav
-      className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
-      style={{
-        background: bgColor,
-        backdropFilter: scrolled ? "blur(10px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(10px)" : "none",
-        borderBottom: border,
-      }}
+      className="fixed inset-x-0 top-0 z-50"
+      style={{ borderBottom: border, transition: "border-color 400ms" }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-10 py-5">
+      {/* Cream layer — fades in when scrolled or on non-home pages */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          opacity: onLight ? 1 : 0,
+          transition: "opacity 450ms ease",
+          background: "linear-gradient(to bottom, rgba(244,240,230,0.97) 0%, rgba(244,240,230,0.90) 100%)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+        }}
+      />
+      {/* Dark sage tint — visible on home hero before scroll */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          opacity: onLight ? 0 : 1,
+          transition: "opacity 450ms ease",
+          background: "linear-gradient(to bottom, rgba(46,61,38,0.72) 0%, transparent 100%)",
+        }}
+      />
+      <div className="relative mx-auto flex max-w-6xl items-center justify-between px-10 py-5">
         {/* Logo → home */}
         <Link
           href="/"
           aria-label="Home"
           className="transition-opacity hover:opacity-50"
-          style={{ color: textColor }}
+          style={{ color: textColor, transition: "color 450ms ease, opacity 150ms" }}
           onClick={(e) => { e.preventDefault(); navigate("/"); }}
         >
           <Presentation size={28} strokeWidth={1.5} />
@@ -109,8 +123,8 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
               <Link
                 key={page}
                 href={`/${page}`}
-                className="text-[15px] tracking-wide transition-opacity hover:opacity-50"
-                style={{ color: textColor }}
+                className="text-[15px] tracking-wide hover:opacity-50"
+                style={{ color: textColor, transition: "color 450ms ease, opacity 150ms" }}
                 onClick={(e) => { e.preventDefault(); navigate(`/${page}`); }}
               >
                 {page}
@@ -120,7 +134,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
               <button
                 onClick={onContactClick}
                 className="text-[15px] tracking-wide transition-opacity hover:opacity-50"
-                style={{ color: textColor, background: "none", border: "none", padding: 0, cursor: "pointer" }}
+                style={{ color: textColor, background: "none", border: "none", padding: 0, cursor: "pointer", transition: "color 450ms ease, opacity 150ms" }}
               >
                 contact
               </button>
@@ -128,7 +142,7 @@ export function Navbar({ poweredCount = 0, onContactClick }: Props) {
               <Link
                 href="/#contact"
                 className="text-[15px] tracking-wide transition-opacity hover:opacity-50"
-                style={{ color: textColor }}
+                style={{ color: textColor, transition: "color 450ms ease, opacity 150ms" }}
                 onClick={(e) => { e.preventDefault(); navigate("/#contact"); }}
               >
                 contact
