@@ -15,10 +15,11 @@ interface Props {
   tags: string[];
   githubUrl?: string;
   liveUrl?: string;
+  screenshots?: string[];
   sections: Section[];
 }
 
-export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections }: Props) {
+export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, screenshots, sections }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const slug = pathname.split("/").pop() ?? "";
@@ -34,10 +35,38 @@ export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections 
 
   return (
     <div
-      className="min-h-screen"
+      className="relative min-h-screen"
       style={{ backgroundColor: "var(--ws-cream)", color: "var(--ws-ink)" }}
     >
       <Navbar />
+
+      {/* ── Left margin decoration ── */}
+      <div aria-hidden className="pointer-events-none absolute left-[3%] top-44 hidden flex-col items-center gap-4 xl:flex">
+        <div style={{ width: 1, height: 64, background: "rgba(74,94,60,0.25)" }} />
+        <div style={{ width: 7, height: 7, background: "rgba(46,61,38,0.22)" }} />
+        <div style={{ width: 4, height: 4, background: "rgba(122,144,104,0.28)", marginLeft: 12 }} />
+        <div style={{ width: 1, height: 96, background: "rgba(74,94,60,0.16)", marginLeft: 5 }} />
+        <div style={{ width: 6, height: 6, background: "rgba(46,61,38,0.18)", marginLeft: -8 }} />
+        <div style={{ width: 3, height: 3, background: "rgba(74,94,60,0.30)", marginLeft: 10 }} />
+        <div style={{ width: 1, height: 52, background: "rgba(74,94,60,0.12)" }} />
+        <div style={{ width: 5, height: 5, background: "rgba(46,61,38,0.20)" }} />
+        <div style={{ width: 1, height: 40, background: "rgba(122,144,104,0.14)", marginLeft: 7 }} />
+      </div>
+
+      {/* ── Right margin decoration ── */}
+      <div aria-hidden className="pointer-events-none absolute right-[3%] top-56 hidden xl:block">
+        <div className="flex flex-col items-end gap-4">
+          <div style={{ width: 6, height: 6, background: "rgba(46,61,38,0.24)", marginRight: 8 }} />
+          <div style={{ width: 1, height: 80, background: "rgba(74,94,60,0.18)", marginRight: 11 }} />
+          <div style={{ width: 8, height: 8, background: "rgba(74,94,60,0.20)", marginRight: 4 }} />
+          <div style={{ width: 4, height: 4, background: "rgba(122,144,104,0.28)", marginRight: 18 }} />
+          <div style={{ width: 1, height: 56, background: "rgba(46,61,38,0.14)", marginRight: 9 }} />
+          <div style={{ width: 5, height: 5, background: "rgba(46,61,38,0.22)", marginRight: 14 }} />
+          <div style={{ width: 3, height: 3, background: "rgba(122,144,104,0.30)", marginRight: 6 }} />
+          <div style={{ width: 1, height: 72, background: "rgba(74,94,60,0.13)", marginRight: 12 }} />
+          <div style={{ width: 7, height: 7, background: "rgba(46,61,38,0.18)", marginRight: 2 }} />
+        </div>
+      </div>
 
       <main className="page-enter mx-auto max-w-3xl px-10 pb-28 pt-36">
         {/* Back link */}
@@ -124,6 +153,25 @@ export function ProjectPage({ name, tagline, tags, githubUrl, liveUrl, sections 
             ))}
           </div>
         </div>
+
+        {/* Screenshots */}
+        {screenshots && screenshots.length > 0 && (
+          <div className="mb-14 space-y-4">
+            {screenshots.map((src, i) => (
+              <div
+                key={i}
+                style={{
+                  boxShadow: "0 4px 20px rgba(28,26,20,0.12), 0 1px 6px rgba(28,26,20,0.06)",
+                  border: "1px solid rgba(28,26,20,0.07)",
+                  overflow: "hidden",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt="" style={{ width: "100%", display: "block" }} />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Sections */}
         <div
