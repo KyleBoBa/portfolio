@@ -7,6 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-mono);
   --font-mono: var(--font-space-mono);
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -25,30 +26,42 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.375rem;
 
-  /* Dark olive portfolio theme */
-  --bg: #2c3424;
-  --fg: #f0f0e8;
-  --frame: #c6cab5;
-  --frame-dark: #2c3424;
+  /* ── Workspace palette ────────────────────────────── */
+  --ws-sage: #2e3d26; /* deep sage — hero wall, primary accent */
+  --ws-sage-mid: #4a5e3c; /* mid sage — borders on dark surfaces   */
+  --ws-sage-muted: #7a9068; /* muted sage — dividers, tags on light  */
+  --ws-cream: #f4f0e6; /* warm cream — page background          */
+  --ws-paper: #f9f5ed; /* slightly warmer — card / note surface */
+  --ws-ink: #1c1a14; /* near-black with warm tint — body text */
+  --ws-ink-faint: rgba(
+    28,
+    26,
+    20,
+    0.48
+  ); /* muted body text on light bg           */
+  --ws-amber: #c8840a; /* lamp glow amber — warm accent         */
+  --ws-amber-warm: #e8c547; /* bright amber — generator dot glow     */
+  --ws-wood: #b07848; /* oak — frames, ruled borders           */
+  --ws-tape: rgba(228, 200, 32, 0.72); /* masking tape yellow                 */
 
-  /* shadcn tokens mapped to the palette */
-  --background: oklch(0.245 0.035 143);
-  --foreground: oklch(0.955 0.008 95);
-  --card: oklch(0.27 0.03 143);
-  --card-foreground: oklch(0.955 0.008 95);
-  --primary: oklch(0.955 0.008 95);
-  --primary-foreground: oklch(0.245 0.035 143);
-  --secondary: oklch(0.30 0.03 143);
-  --secondary-foreground: oklch(0.955 0.008 95);
-  --muted: oklch(0.30 0.03 143);
-  --muted-foreground: oklch(0.65 0.015 95);
-  --accent: oklch(0.30 0.03 143);
-  --accent-foreground: oklch(0.955 0.008 95);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.65 0.015 95);
+  /* ── shadcn tokens — cream / light palette ─────── */
+  --background: oklch(0.955 0.011 90); /* ≈ #f4f0e6 */
+  --foreground: oklch(0.14 0.018 90); /* ≈ #1c1a14 */
+  --card: oklch(0.97 0.007 85); /* ≈ #f9f5ed */
+  --card-foreground: oklch(0.14 0.018 90);
+  --primary: oklch(0.24 0.042 142); /* ≈ #2e3d26 sage */
+  --primary-foreground: oklch(0.955 0.011 90);
+  --secondary: oklch(0.88 0.015 90);
+  --secondary-foreground: oklch(0.24 0.042 142);
+  --muted: oklch(0.9 0.01 90);
+  --muted-foreground: oklch(0.48 0.018 90);
+  --accent: oklch(0.63 0.12 72); /* ≈ amber */
+  --accent-foreground: oklch(0.14 0.018 90);
+  --border: oklch(0.82 0.012 90);
+  --input: oklch(0.88 0.01 90);
+  --ring: oklch(0.63 0.12 72);
 }
 
 @layer base {
@@ -57,7 +70,15 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-russo-one), monospace;
+    font-family: var(--font-space-mono), monospace;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-russo-one), sans-serif;
   }
   html {
     scroll-behavior: smooth;
@@ -66,16 +87,33 @@
 
 /* ── Paper fold transition ──────────────────────────── */
 @keyframes paper-fold-away {
-  0%   { transform: var(--card-rotate, rotate(0deg)) perspective(900px) rotateX(0deg);   opacity: 1; }
-  60%  { opacity: 0.6; }
-  100% { transform: var(--card-rotate, rotate(0deg)) perspective(900px) rotateX(-88deg); opacity: 0; }
+  0% {
+    transform: var(--card-rotate, rotate(0deg)) perspective(900px) rotateX(0deg);
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: var(--card-rotate, rotate(0deg)) perspective(900px)
+      rotateX(-88deg);
+    opacity: 0;
+  }
 }
 
 /* 1.1 — unfolds upward from below (like lifting from the card's position) */
 @keyframes page-unfold {
-  0%   { opacity: 0; transform: perspective(1000px) rotateX(6deg) translateY(24px); }
-  55%  { opacity: 1; }
-  100% { opacity: 1; transform: none; }
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(6deg) translateY(24px);
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .page-enter {
@@ -84,8 +122,6 @@
 }
 
 /* ── Sliding door navigation transitions ───────────── */
-/* direction set on <html data-nav-dir="..."> before router.push */
-
 html[data-nav-dir="forward"] .page-slide-enter {
   animation: slide-from-right 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -97,33 +133,45 @@ html[data-nav-dir="lateral"] .page-slide-enter {
 }
 
 @keyframes slide-from-right {
-  from { opacity: 0; transform: translateX(18px); }
-  to   { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 @keyframes slide-from-left {
-  from { opacity: 0; transform: translateX(-18px); }
-  to   { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 @keyframes nav-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ── Card expand / contract (project card ↔ project page) ── */
-/* Old page disappears immediately; new page fades in.        */
-/* The shared element (project title) morphs between the two. */
 :root[data-nav-dir="expand"]::view-transition-old(root) {
   animation: none;
 }
 :root[data-nav-dir="expand"]::view-transition-new(root) {
   animation: nav-fade-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-/* Shared element group: controls the position/size morph */
 :root[data-nav-dir="expand"]::view-transition-group(*) {
   animation-duration: 420ms;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* Cross-fade between old/new screenshots of the shared element */
 :root[data-nav-dir="expand"]::view-transition-old(*),
 :root[data-nav-dir="expand"]::view-transition-new(*) {
   animation-duration: 420ms;
