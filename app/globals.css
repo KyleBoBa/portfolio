@@ -85,7 +85,51 @@
   }
 }
 
-/* ── Paper fold transition ──────────────────────────── */
+/* ── Sage fabric surface ─────────────────────────────────────────────
+  Shared background treatment for all dark-sage pages.
+  Effect: medium-pitch woven-square seam lines (textile / duvet look)
+  over the base sage green. Soft viewport-relative vignettes fade the
+  seam visibility toward all four edges; the centre region reads with
+  most definition and the pattern softens outward without vanishing.
+  ──────────────────────────────────────────────────────────────────── */
+.sage-surface {
+  background-color: #2e3d26;
+  position: relative;
+  isolation: isolate;
+}
+
+.sage-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(244, 240, 230, 0.13) 0 1px,
+      transparent 1px 18px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(244, 240, 230, 0.11) 0 1px,
+      transparent 1px 18px
+    );
+  /* Horizontal vignette: grid fades into the base sage at both side edges.
+     Where the mask is transparent the ::before is invisible, revealing the
+     element's own background-color (#2e3d26) — same sage, no harsh edge. */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 16%,
+    rgba(0, 0, 0, 0.9) 34%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0.9) 66%,
+    rgba(0, 0, 0, 0.2) 84%,
+    transparent 100%
+  );
+}
+
 @keyframes paper-fold-away {
   0% {
     transform: var(--card-rotate, rotate(0deg)) perspective(900px) rotateX(0deg);
