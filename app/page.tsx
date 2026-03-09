@@ -55,7 +55,22 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen page-slide-enter sage-surface" style={{ color: "var(--ws-cream)" }}>
+    <>
+      <style>{`
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--ws-cream); 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888; 
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--ws-sage-muted); 
+    }
+    `}</style>
+      <div className="min-h-screen page-slide-enter sage-surface" style={{ color: "var(--ws-cream)" }}>
       <Navbar poweredCount={powered.size} onContactClick={scrollToContact} />
 
       {/* ── Hero — dark sage wall ──────────────────────── */}
@@ -348,6 +363,7 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 
