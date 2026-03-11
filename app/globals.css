@@ -83,6 +83,25 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* ── Scrollbar — workspace palette ──────────────────── */
+  /* ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ws-cream);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ws-sage);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ws-amber);
+  } */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ws-sage) var(--ws-cream);
+  }
 }
 
 /* ── Sage fabric surface ─────────────────────────────────────────────

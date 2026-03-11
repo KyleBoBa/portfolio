@@ -56,20 +56,6 @@ export default function Home() {
 
   return (
     <>
-      <style>{`
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--ws-cream); 
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #888; 
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--ws-sage-muted); 
-    }
-    `}</style>
       <div className="min-h-screen page-slide-enter sage-surface" style={{ color: "var(--ws-cream)" }}>
       <Navbar poweredCount={powered.size} onContactClick={scrollToContact} />
 
@@ -119,16 +105,15 @@ export default function Home() {
                     className="text-[1.15rem] leading-[1.65]"
                     style={{ color: "rgba(244,240,230,0.75)", fontFamily: "var(--font-space-mono), monospace" }}
                   >
-                    Hiya! I&apos;m a 21 yo engineering and
-                    <br />
-                    education student specializing in system architecture.
+                    Hiya! I&apos;m a 21 yo Engineering and 
+                    education student focused on system architecture.
                   </p>
                   <p
                     className="text-[1.15rem] leading-[1.65]"
                     style={{ color: "rgba(244,240,230,0.75)", fontFamily: "var(--font-space-mono), monospace" }}
                   >
                     I dedicate a lot of time to exploring open-source projects
-                    to learn how things are built and integrated.
+                    to learn how systems are built and integrated.
                   </p>
                 </div>
               </div>

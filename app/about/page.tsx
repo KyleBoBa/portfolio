@@ -89,7 +89,7 @@ export default function About() {
                 rel="noreferrer"
                 style={{ color: "var(--ws-sage)", textDecoration: "underline" }}
               >
-                engineering and teaching student
+                Engineering and teaching student
               </a>{" "}
               studying at{" "}
               <strong style={{ color: "var(--ws-sage)" }}>KTH</strong> Royal Institute of
@@ -103,14 +103,14 @@ export default function About() {
               style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               Teaching has made me a better developer. Breaking complex problems into clear,
-              digestible steps transfers directly to writing clean, readable code.
+              digestible steps transfers directly in to designing systems and writing clean, readable code.
             </p>
             <p
               className="text-[1rem] leading-[2]"
               style={{ color: "var(--ws-ink)", fontFamily: "var(--font-space-mono), monospace" }}
             >
               Outside of school and projects, I enjoy playing video games (you might notice the
-              easter eggs), finding recipes to cook or bake, reading books — currently The Witcher:
+              easter eggs), finding recipes to cook or bake, reading books — currently reading The Witcher:
               Baptism of Fire — and spending time with friends.
             </p>
             <p
